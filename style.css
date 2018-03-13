@@ -1,0 +1,291 @@
+
+:root {
+  --yellow: #ffc600;
+  --black: #272727;
+}
+
+html {
+  /* border-box box model allows us to add padding and border to our elements without increasing their size */
+  box-sizing: border-box;
+  /* A system font stack so things load nice and quick! */
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+    Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-weight: 200;
+  font-size: 15px;
+  color: var(--black);
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.07);
+}
+
+/*
+  WAT IS THIS?!
+  We inherit box-sizing: border-box; from our <html> selector
+  Apparently this is a bit better than applying box-sizing: border-box; directly to the * selector
+*/
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body {
+  /* background-image: url("./images/topography.svg"),
+    linear-gradient(110deg, #f93d66, #6d47d9); */
+  /* background-size: 340px, auto; */
+  min-height: 100vh;
+  margin: 0px;
+  /* background: white; */
+  background-attachment: fixed;
+  letter-spacing: -1px;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0 0 0px 0;
+}
+ul {
+  list-style: none;
+}
+a {
+  color: #98C379;
+  font-weight: 400;
+  text-decoration: none;
+}
+img {
+  max-width: 200px;
+  height: 160px;
+  margin: 10px;
+  border: 3px solid rgba(255,255,255,0.5);
+  border-radius: 3px;
+}
+
+.titles {
+  text-transform: lowercase;
+  text-decoration: underline;
+
+}
+.training-material {
+  background-color: #3D3D3D;
+  border: 3px solid rgba(0,0,0,0.2);
+  border-radius: 3px;
+}
+
+/* --------------------------------------------------------------------- */
+
+/* Body container STARTS */
+body{
+  display: grid;
+  grid-template-columns: 50px repeat(10, 1fr) 50px;
+  grid-template-rows:[header-starts] 5fr [header-ends] auto [mainmenu-ends] auto [content-ends] 100px [foother-ends];
+  background: linear-gradient(to right, #30628D, #4AC5EF);
+}
+/* Body container ENDS */
+
+
+
+/* --------------------------------------------------------------------- */
+
+
+/* First Body Item/HEADER STARTS */
+.header {
+  display: grid;
+  min-height: 50vh;
+  grid-column:  1/-1;
+  grid-row: header-starts / header-ends;
+  background: url(./Baner.jpg);
+  background-size: cover;
+  /* background-attachment: fixed; */
+  border-bottom: 0px solid rgba(0,0,0,0.0);
+  border-radius: 80%/0 5px 250px 0;
+  z-index: 1;
+}
+
+.header-top-layer {
+  display: grid;
+  min-height: 50vh;
+  grid-column:  1/-1;
+  grid-row: header-starts / header-ends;
+  background:rgba(255,255,255,0.1);
+  background-size: cover;
+  border-bottom: 0px solid rgba(0,0,0,0.0);
+  border-radius: 80%/0 5px 250px 0;
+  z-index: 2;
+}
+/* First Body Item/HEADER ENDS */
+
+
+/* --------------------------------------------------------------------- */
+
+
+ /* Second Body Item/MAIN_MENU STARTS */
+.main-menu-aria {
+  display: grid;
+  padding: 15px;
+  grid-template-columns: 50px repeat(10, 1fr) 50px;
+  grid-template-rows: 1fr;
+  grid-column: -1 / 1;
+  grid-row: 2 / 3;
+  /* background: rgba(0,0,0,0.7); */
+}
+.main-menu-ul {
+  margin: 0px;
+  padding:0px;
+  display: grid;
+  grid-gap: 5px;
+  grid-template-columns: repeat(4, minmax(100px, 4fr));
+  grid-column: 4/10;
+  justify-content: center;
+  align-items: center;
+}
+
+.main-menu-li {
+  display: grid;
+  min-height: 50px;
+  min-width: inherit;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  border: 2px solid rgba(0, 0, 0, 0.03);
+  border-radius: 3px;
+  background-color: rgba(0,0,0,0.4);
+  transition: 0.4s;
+  color: #98C379;
+}
+.main-menu-li:hover {
+  background-color: rgba(255,255,255,0.1);
+}
+ /* Second Body Item/MAIN_MENU ENDS */
+
+
+/* --------------------------------------------------------------------- */
+
+
+ /* Third Body Item/MAIN CONTENT STARTS */
+
+.main-content {
+ display: grid;
+ grid-template-columns:1fr 1fr 1fr;
+ grid-template-rows: auto auto;
+ grid-column: 4/10;
+ grid-row: mainmenu-ends / content-ends;
+ padding:30px;
+ margin: 10px;
+ font-size: 1.2em;
+ text-align: justify;
+ background-color: #FFFFFF;
+ border-top: 1px solid rgba(0,0,0,0.0);
+ /* border-radius: 100%/600px 0 300px 0; */
+}
+.text-contect {
+  display: grid;
+  grid-column: 1 / 4;
+  padding: 0px 10px 10px 10px;
+  margin: 10px;
+  border-radius: 5px;
+  border: 3px solid rgba(0,0,0,0.0);
+  font-weight: 400;
+}
+.images {
+  display: flex;
+  flex-wrap: wrap;
+  /* grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: repeat(10, 160px); */
+  grid-column: 1/4;
+  grid-row: 2 / 3;
+  margin: 10px;
+  /* grid-gap: 5px; */
+  /* padding: 10px;
+  border: 1px solid rgba(0,0,0,0.2);
+  border-radius: 5px; */
+  justify-content: center;
+  align-items: center;
+}
+
+  /* Third Body Item/MAIN CONTENT ENDS */
+
+
+/* --------------------------------------------------------------------- */
+
+
+/* Fourth Body Item/FOOTHER STARTS */
+.foother-area {
+  display: grid;
+  height: 100px;
+  grid-template-columns: 50px repeat(5, 2fr) 50px;
+  grid-template-rows: 10px 80px 10px;
+  grid-column: 1/-1;
+  grid-row: 4/ -1;
+  background-color: rgba(0,0,0,0.8);
+}
+
+.foother {
+  margin: 10px;
+  display: grid;
+  height: auto;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows:1fr;
+  grid-row: 2/3;
+  grid-column: 3/6;
+  border-radius:5px;
+  border: 1px solid rgba(255,255,255,1);
+
+}
+.foother-left {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-column: 1/2;
+  grid-row: 1/2;
+  padding: 2px;
+  margin: 0px;
+  font-size: 12px;
+}
+
+.foother-center {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-column: 2/3;
+  grid-row: 1/2;
+  padding: 2px;
+  margin: 0px;
+  font-size: 12px;
+}
+
+.foother-right {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-column: 3/4;
+  grid-row: 1/2;
+  padding: 2px;
+  margin: 0px;
+  font-size: 12px;
+}
+
+/* Fourth Body Item/FOOTHER ENDS */
+
+
+/*  Media queries STARTS */
+@media only screen and (max-width: 835px) {
+  .body-container {
+    display: grid;
+    grid-template-columns: 50px repeat(10, 1fr) 50px;
+    grid-template-rows:[header-starts] 5fr [header-ends] auto [mainmenu-ends] auto [content-ends] 100px [foother-ends];
+  }
+  .main-menu-ul {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(4, 50px);
+    grid-column: 2/12;
+    padding: 3px;
+  }
+  .main-content {
+    grid-column: 2/12;
+  }
+ .foother {
+  grid-column: 2/12;
+ }
+}
+/* Media queries ENDS  */
