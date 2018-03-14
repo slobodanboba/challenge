@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <title>JS + CSS Clock</title>
 </head>
-<body>
-    <div class="clock">
+<body class="body-container">
+    <div class="clock london-clock">
       <div class="clock-face">
         <div class="hand hour-hand"></div>
         <div class="hand min-hand"></div>
@@ -14,8 +14,32 @@
         <div class="hours hour6"></div>
         <div class="hours hour9"></div>
         <div class="hours hour12"></div>
+      <div class="city">London</div>
+    </div>
+    </div>
+    <div class="clock tokyo-clock">
+      <div class="clock-face">
+        <div class="hand hour-hand hour-handTokio"></div>
+        <div class="hand min-hand min-handTokio"></div>
+        <div class="hand second-hand second-handTokio"></div>
+        <div class="hours hour3"></div>
+        <div class="hours hour6"></div>
+        <div class="hours hour9"></div>
+        <div class="hours hour12"></div>
+        <div class="city">Tokio</div>
       </div>
-      <div class="city">London Time</div>
+    </div>
+    <div class="clock sydney-clock">
+      <div class="clock-face">
+        <div class="hand hour-hand hour-handSydney"></div>
+        <div class="hand min-hand min-handSydney"></div>
+        <div class="hand second-hand second-handSydney"></div>
+        <div class="hours hour3"></div>
+        <div class="hours hour6"></div>
+        <div class="hours hour9"></div>
+        <div class="hours hour12"></div>
+         <div class="city">Sydney</div>
+      </div>
     </div>
   <style>
     html {
@@ -26,18 +50,24 @@
       font-size: 10px;
     }
 
-    body {
+    /* body {
       margin: 0;
       font-size: 2rem;
       display:flex;
       flex:1;
       min-height: 100vh;
       align-items: center;
+    } */
+    .body-container {
+     display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-rows: 1fr auto 1fr;
     }
     .city {
-      position: relative;
-      top: 30px;
-      font-size: 35px;
+      position: absolute;
+      bottom: 30px;
+      left: 50px;
+      font-size: 30px;
     }
     .clock {
       width: 25rem;
@@ -48,11 +78,11 @@
       position: relative;
       padding:1rem;
       background-color: white;
-      /* box-shadow:
+      box-shadow:
         0 0 0 4px rgba(0,0,0,0.1),
         inset 0 0 0 3px #EFEFEF,
         inset 0 0 10px black,
-        0 0 10px rgba(0,0,0,0.2); */
+        0 0 10px rgba(0,0,0,0.2);
     }
 
     .clock-face {
@@ -72,6 +102,7 @@
       transition: all 0.05s;
       transition-timing-function: cubic-bezier(0.1, 2.7, 0.58, 1);
     }
+
     .min-hand {
       width:50%;
       height:10px;
@@ -97,6 +128,28 @@
     }
 
     .hours {
+      width:7%;
+      height:8px;
+      background:black;
+      position: absolute;
+      transform-origin: 100%;
+      margin: 0px;
+      transform: rotate(90deg);
+      top:5%;
+      left: 30%;
+    }
+    .hoursTokio {
+      width:7%;
+      height:8px;
+      background:black;
+      position: absolute;
+      transform-origin: 100%;
+      margin: 0px;
+      transform: rotate(90deg);
+      top:5%;
+      left: 30%;
+    }
+    .hoursSydney {
       width:7%;
       height:8px;
       background:black;
@@ -135,9 +188,9 @@
 </style>
 
 <script>
-
+//  LONDON starts---------------------------------------------------------------------------------------------------------------------------------------------- -->
 let offset = '';
-let guadalajaraOffset = 6;
+let guadalajaraOffset = '';
 
 fetch(' https://maps.googleapis.com/maps/api/timezone/json?location=51.5073,-0.1277&timestamp=1331161200&key=AIzaSyANpHwd0ZvP_2qrvqEEp-5l6NS3LkwxSbY ')
   .then(function(response) {
@@ -147,6 +200,14 @@ fetch(' https://maps.googleapis.com/maps/api/timezone/json?location=51.5073,-0.1
      offset = myJson.rawOffset;
       console.log(myJson);
   });
+  fetch(' https://maps.googleapis.com/maps/api/timezone/json?location=20.6596,-103.3496&timestamp=1331161200&key=AIzaSyANpHwd0ZvP_2qrvqEEp-5l6NS3LkwxSbY ')
+    .then(function(response) {
+      return response.json();
+    })
+    .then(function(guadalajara) {
+       guadalajaraOffset = guadalajara.rawOffset;
+        console.log(guadalajaraOffset);
+    });
 
 const secondHand = document.querySelector('.second-hand');
 const minsHand = document.querySelector('.min-hand');
@@ -163,15 +224,96 @@ function setDate() {
   minsHand.style.transform = `rotate(${minsDegrees}deg)`;
 
   const hour = now.getHours();
-  const offsetHours = (offset / 3600)
-  const hourDegrees = (((hour + offsetHours + guadalajaraOffset) / 12) * 360) + ((mins/60)*30) + 90;
-
+  const offsetHours = (offset / 3600);
+  const guadalajaraOffsetHours = (guadalajaraOffset / 3600)
+  console.log(guadalajaraOffsetHours);
+  const hourDegrees = (((hour + offsetHours + guadalajaraOffsetHours) / 12) * 360) + ((mins/60)*30) + 90;
+   console.log("londn",hourDegrees);
   hourHand.style.transform = `rotate(${hourDegrees}deg)`;
 }
 
 setInterval(setDate, 1000);
 
 setDate();
+//  LONDON Ends---------------------------------------------------------------------------------------------------------------------------------------------- -->
+// TOKIO Starts---------------------------------------------------------------------------------------------------------------------------------------------- -->
+let offsetTokio = '';
+
+fetch(' https://maps.googleapis.com/maps/api/timezone/json?location=35.6895,135.6917&timestamp=1331161200&key=AIzaSyANpHwd0ZvP_2qrvqEEp-5l6NS3LkwxSbY ')
+  .then(function(response) {
+    return response.json();
+  })
+  .then(function(tokio) {
+     offsetTokio = tokio.rawOffset;
+      console.log(offsetTokio);
+  });
+
+const secondHandTokio = document.querySelector('.second-handTokio');
+const minsHandTokio = document.querySelector('.min-handTokio');
+const hourHandTokio = document.querySelector('.hour-handTokio');
+
+function setDateTokio() {
+  const nowTokio = new Date();
+  const secondsTokio = nowTokio.getSeconds();
+  const secondsDegreesTokio = ((secondsTokio / 60) * 360) + 90;
+  secondHandTokio.style.transform = `rotate(${secondsDegreesTokio}deg)`;
+
+  const minsTokio = nowTokio.getMinutes();
+  const minsDegreesTokio = ((minsTokio / 60) * 360) + ((secondsTokio / 60)*6) + 90;
+  minsHandTokio.style.transform = `rotate(${minsDegreesTokio}deg)`;
+
+  const hourTokio = nowTokio.getHours();
+  const offsetHoursTokio = (offsetTokio / 3600);
+  const guadalajaraOffsetHours = (guadalajaraOffset / 3600);
+  const hourDegreesTokio = (((hourTokio + offsetHoursTokio + guadalajaraOffsetHours) / 12) * 360) + ((minsTokio/60)*30) + 90;
+  console.log("tokio",hourDegreesTokio);
+  hourHandTokio.style.transform = `rotate(${hourDegreesTokio}deg)`;
+}
+
+setInterval(setDateTokio, 1000);
+
+setDateTokio();
+// TOKIO Ends---------------------------------------------------------------------------------------------------------------------------------------------- -->
+// SYDNEY Starts---------------------------------------------------------------------------------------------------------------------------------------------- -->
+
+
+let offsetSydney = '';
+
+fetch(' https://maps.googleapis.com/maps/api/timezone/json?location=-33.8675,151.207&timestamp=1331161200&key=AIzaSyANpHwd0ZvP_2qrvqEEp-5l6NS3LkwxSbY ')
+  .then(function(response) {
+    return response.json();
+  })
+  .then(function(sydney) {
+     offsetSydney = sydney.rawOffset;
+      console.log(offsetSydney);
+  });
+
+
+const secondHandSydney = document.querySelector('.second-handSydney');
+const minsHandSydney = document.querySelector('.min-handSydney');
+const hourHandSydney = document.querySelector('.hour-handSydney');
+
+function setDateSydney() {
+  const nowSydney = new Date();
+  const secondsSydney = nowSydney.getSeconds();
+  const secondsDegreesSydney = ((secondsSydney / 60) * 360) + 90;
+  secondHandSydney.style.transform = `rotate(${secondsDegreesSydney}deg)`;
+
+  const minsSydney = nowSydney.getMinutes();
+  const minsDegreesSydney = ((minsSydney / 60) * 360) + ((secondsSydney/60)*6) + 90;
+  minsHandSydney.style.transform = `rotate(${minsDegreesSydney}deg)`;
+
+  const hourSydney = nowSydney.getHours();
+  const offsetHoursSydney = (offsetSydney / 3600);
+  const guadalajaraOffsetHours = (guadalajaraOffset / 3600);
+  const hourDegreesSydney = (((hourSydney + offsetHoursSydney + guadalajaraOffsetHours) / 12) * 360) + ((minsSydney/60)*30) + 90;
+   console.log("Sydney",hourDegreesSydney);
+  hourHandSydney.style.transform = `rotate(${hourDegreesSydney}deg)`;
+}
+
+setInterval(setDateSydney, 1000);
+
+setDateSydney();
 
 </script>
 </body>
