@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>JS + CSS Clock</title>
+  <title>World Time Challenge</title>
 </head>
 <body class="body-container">
     <div class="clock london-clock">
@@ -45,11 +45,8 @@
       <div class="temp-sydney"><span class="text-london">Now <span class="tempSedney"></span><span>°C</span>|<span class="tempFSedney"></span><span>°F</span></div>
     </div>
 
-
-
   <style>
     html {
-
       font-family:'helvetica neue';
       text-align: center;
       font-size: 10px;
@@ -74,28 +71,28 @@
     .Tokyocity {
       left: 33%;
     }
-        .clock {
-          width: 25rem;
-          height: 25rem;
-          border:5px solid rgba(255,255,255,0.8);
-          border-radius:50%;
-          margin:50px auto;
-          position: relative;
-          padding:2rem;
-          background: rgba(0, 0, 0, 0.2);
-          box-shadow:
-            0 0 0 4px rgba(0,0,0,0.1),
-            inset 0 0 0 3px #EFEFEF,
-            inset 0 0 10px black,
-            0 0 10px rgba(0,0,0,0.2);
-        }
+    .clock {
+      width: 25rem;
+      height: 25rem;
+      border:5px solid rgba(255,255,255,0.8);
+      border-radius:50%;
+      margin:50px auto;
+      position: relative;
+      padding:2rem;
+      background: rgba(0, 0, 0, 0.2);
+      box-shadow:
+      0 0 0 4px rgba(0,0,0,0.1),
+      inset 0 0 0 3px #EFEFEF,
+      inset 0 0 10px black,
+      0 0 10px rgba(0,0,0,0.2);
+    }
 
-        .clock-face {
-          position:relative;
-          width: 100%;
-          height: 100%;
-          transform: translateY(-3px); /* account for the height of the clock hands */
-        }
+    .clock-face {
+      position:relative;
+      width: 100%;
+      height: 100%;
+      transform: translateY(-3px); /* account for the height of the clock hands */
+    }
     .hour-hand {
       width:50%;
       height:8px;
@@ -108,7 +105,6 @@
       transition: all 0.05s;
       transition-timing-function: cubic-bezier(0.1, 2.7, 0.58, 1);
     }
-
     .min-hand {
       width:50%;
       height:5px;
@@ -133,7 +129,6 @@
       transition: all 0.05s;
       transition-timing-function: cubic-bezier(0.1, 2.7, 0.58, 1);
     }
-
     .hours {
       width:7%;
       height:8px;
@@ -141,14 +136,11 @@
       position: absolute;
       transform: rotate(90deg);
     }
-
     .hour3 {
       transform: rotate(0deg);
       top:50%;
       left:96%;
     }
-
-
     .hour6 {
       padding: 0px;
       margin: 0px;
@@ -156,7 +148,6 @@
       top:100%;
       left:46%;
     }
-
     .hour9 {
       transform: rotate(0deg);
       top:50%;
@@ -172,7 +163,6 @@
     .temp {
       font-size: 30px;
     }
-
     .temp-london {
         position: relative;
         top: 50px;
@@ -194,10 +184,9 @@
       font-weight: 600;
       color: rgba(255,255,255,0.7);
     }
-
 </style>
 
-<script>window.myWidgetParam ? window.myWidgetParam : window.myWidgetParam = [];  window.myWidgetParam.push({id: 3,cityid: '4005539',appid: '261e313010ab3d43b1344ab9eba64cfa',units: 'metric',containerid: 'openweathermap-widget-3',  });  (function() {var script = document.createElement('script');script.async = true;script.charset = "utf-8";script.src = "//openweathermap.org/themes/openweathermap/assets/vendor/owm/js/weather-widget-generator.js";var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(script, s);  })();
+<script>
 //  LONDON Clock starts---------------------------------------------------------------------------------------------------------------------------------------------- -->
 let offset = '';
 let guadalajaraOffset = '';
@@ -284,13 +273,13 @@ setDateTokio();
 let offsetSydney = '';
 
 fetch(' https://maps.googleapis.com/maps/api/timezone/json?location=-33.8675,151.207&timestamp=1331161200&key=AIzaSyANpHwd0ZvP_2qrvqEEp-5l6NS3LkwxSbY ')
-  .then(function(response) {
-    return response.json();
-  })
-  .then(function(sydney) {
-     offsetSydney = sydney.rawOffset;
-      console.log(offsetSydney);
-  });
+.then(function(response) {
+  return response.json();
+})
+.then(function(sydney) {
+  offsetSydney = sydney.rawOffset;
+  console.log(offsetSydney);
+});
 const secondHandSydney = document.querySelector('.second-handSydney');
 const minsHandSydney = document.querySelector('.min-handSydney');
 const hourHandSydney = document.querySelector('.hour-handSydney');
@@ -306,7 +295,7 @@ function setDateSydney() {
   const offsetHoursSydney = (offsetSydney / 3600);
   const guadalajaraOffsetHours = (guadalajaraOffset / 3600);
   const hourDegreesSydney = (((hourSydney + offsetHoursSydney + guadalajaraOffsetHours) / 12) * 360) + ((minsSydney/60)*30) + 90;
-   console.log("Sydney",hourDegreesSydney);
+  console.log("Sydney",hourDegreesSydney);
   hourHandSydney.style.transform = `rotate(${hourDegreesSydney}deg)`;
 }
 setInterval(setDateSydney, 1000);
@@ -333,30 +322,17 @@ fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&unit
   .then(function(data) {
     wheatherLondon = data.main.temp ;
     document.querySelector(".tempLondon").innerHTML = `${Math.round(wheatherLondon)}`;
+    let wheatherLondonF = (wheatherLondon * 1.8)+32;
+    document.querySelector(".tempFLondon").innerHTML = `${Math.round(wheatherLondonF)}`
   });
 }
   getWheatherLondon();
   setInterval(getWheatherLondon, 600000);
 
-function getWheatherFLondon() {
-  fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&APPID=261e313010ab3d43b1344ab9eba64cfa`)
-    .then(function(response) {
-      return response.json();
-    })
-    .then(function(dataF) {
-      wheatherFLondon = dataF.main.temp ;
-      let textFLondon = ((wheatherFLondon-273.15)*1.8)+32;
-      document.querySelector(".tempFLondon").innerHTML = `${Math.round(textFLondon)}`;
-    });
-}
-
-getWheatherFLondon();
-setInterval(getWheatherFLondon, 600000);
-
 // Starts Tokyo Wheather ----------------------------------------------------------------------------------------------------------------------------------------
 let wheatherTokyo = '';
 
-function getWheatherMetricTokyo() {
+function getWheatherTokyo() {
 fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${latTokyo}&lon=${lonTokyo}&units=metric&APPID=261e313010ab3d43b1344ab9eba64cfa`)
   .then(function(response) {
     return response.json();
@@ -364,30 +340,19 @@ fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${latTokyo}&lon=${lonT
   .then(function(data) {
     wheatherTokyo = data.main.temp ;
     document.querySelector(".tempTokyo").innerHTML = `${Math.round(wheatherTokyo)}`;
+    let wheatherTokyoF = (wheatherTokyo * 1.8)+32;
+    document.querySelector(".tempFTokyo").innerHTML = `${Math.round(wheatherTokyoF)}`;
   });
 }
-  getWheatherMetricTokyo();
-  setInterval(getWheatherMetricTokyo, 600000);
+  getWheatherTokyo();
+  setInterval(getWheatherTokyo, 600000);
 
-function getWheatherfahrenheit() {
-  fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${latTokyo}&lon=${lonTokyo}&APPID=261e313010ab3d43b1344ab9eba64cfa`)
-    .then(function(response) {
-      return response.json();
-    })
-    .then(function(data) {
-      wheatherFTokyo = data.main.temp ;
-      let textFTokyo = ((wheatherFTokyo-273.15)*1.8)+32;
-      document.querySelector(".tempFTokyo").innerHTML = `${Math.round(textFTokyo)}`;
-    });
-}
-getWheatherfahrenheit();
-setInterval(getWheatherfahrenheit, 600000);
 // Starts Sydney Wheather ----------------------------------------------------------------------------------------------------------------------------------------
 
 wheatherSydney = '';
 wheatherSydneyF = '';
 
-function getWheatherMetricSedney() {
+function getWheatherSedney() {
 fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${latSydney}&lon=${lonSydney}&units=metric&APPID=261e313010ab3d43b1344ab9eba64cfa`)
   .then(function(response) {
     return response.json();
@@ -395,25 +360,13 @@ fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${latSydney}&lon=${lon
   .then(function(data) {
     wheatherSydney = data.main.temp ;
     document.querySelector(".tempSedney").innerHTML = `${Math.round(wheatherSydney)}`;
+    let wheatherSydneyF = (wheatherSydney * 1.8)+32;
+    document.querySelector(".tempFSedney").innerHTML = `${Math.round(wheatherSydneyF)}`;
   });
 }
-  getWheatherMetricSedney();
+  getWheatherSedney();
   setInterval(getWheatherMetricSedney, 600000);
 
-function getWheatherFSedney() {
-  fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${latSydney}&lon=${lonSydney}&APPID=261e313010ab3d43b1344ab9eba64cfa`)
-    .then(function(response) {
-      return response.json();
-    })
-    .then(function(dataF) {
-      wheatherF = dataF.main.temp ;
-      let textF = ((wheatherF-273.15)*1.8)+32;
-      document.querySelector(".tempFSedney").innerHTML = `${Math.round(textF)}`;
-    });
-}
-
-getWheatherFSedney();
-setInterval(getWheatherFSedney, 600000);
 </script>
 </body>
 </html>
