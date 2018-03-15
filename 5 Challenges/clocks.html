@@ -40,9 +40,17 @@
         <div class="hours hour6"></div>
         <div class="hours hour9"></div>
         <div class="hours hour12"></div>
-         <div class="city">Sydney</div>
-      </div>
-      <div class="temp-sydney"><span class="text-london">Now <span class="tempSedney"></span><span>°C</span>|<span class="tempFSedney"></span><span>°F</span></div>
+          <div class="city">
+            <select class="selected-cityname" name="city-selector" id="city-selectors">
+               <option class="selected-city" value="">Select A City</option>
+               <option class="selected-city" value="Sydney">Sydney</option>
+               <option class="selected-city" value="Bangkok">Bangkok</option>
+               <option class="selected-city" value="Guadalajara">Guadalajara</option>
+               <option class="selected-city" value="Mexico">Mexico</option>
+             </select>
+           </div>
+        </div>
+      <div class="temp-sydney"><span class="text-london">Now <span class="tempSelected"></span><span>°C</span>|<span class="tempFSelected"></span><span>°F</span></div>
     </div>
 
   <style>
@@ -68,6 +76,36 @@
       color: rgba(255,255,255,0.7);
       z-index: auto;
     }
+    select {
+      bottom: 7px;
+      right: 22%;
+      padding: 0px;
+      margin: 0px;
+      position: relative;
+      font-size: 30px;
+      background: rgba(255, 255, 255, 0.0);
+      border: none;
+      color: rgba(255,255,255,0.7);
+      font-weight: 600;
+      font-family:'helvetica neue';
+      text-align: center;
+    }
+    option {
+      bottom: 7px;
+      right: 22%;
+      padding: 0px;
+      margin: 0px;
+      position: relative;
+      font-size: 30px;
+      background-color: black;
+      border: none;
+      color: black;
+      text-align: center;
+    }
+    .selected-city {
+
+
+    }
     .Tokyocity {
       left: 33%;
     }
@@ -86,7 +124,6 @@
       inset 0 0 10px black,
       0 0 10px rgba(0,0,0,0.2);
     }
-
     .clock-face {
       position:relative;
       width: 100%;
@@ -187,6 +224,7 @@
 </style>
 
 <script>
+
 //  LONDON Clock starts---------------------------------------------------------------------------------------------------------------------------------------------- -->
 let offset = '';
 let guadalajaraOffset = '';
@@ -223,9 +261,7 @@ function setDate() {
   const hour = now.getHours();
   const offsetHours = (offset / 3600);
   const guadalajaraOffsetHours = (guadalajaraOffset / 3600)
-  console.log(guadalajaraOffsetHours);
   const hourDegrees = (((hour + offsetHours + guadalajaraOffsetHours) / 12) * 360) + ((mins/60)*30) + 90;
-   console.log("londn",hourDegrees);
   hourHand.style.transform = `rotate(${hourDegrees}deg)`;
 }
 
@@ -242,7 +278,6 @@ fetch(' https://maps.googleapis.com/maps/api/timezone/json?location=35.6895,135.
   })
   .then(function(tokio) {
      offsetTokio = tokio.rawOffset;
-      console.log(offsetTokio);
   });
 
 const secondHandTokio = document.querySelector('.second-handTokio');
@@ -269,10 +304,43 @@ setInterval(setDateTokio, 1000);
 setDateTokio();
 // TOKIO Clock Ends---------------------------------------------------------------------------------------------------------------------------------------------- -->
 // SYDNEY Clock Starts---------------------------------------------------------------------------------------------------------------------------------------------- -->
+// let citiescord = {
+//   Mexico: {
+//     lon: -99.127663,
+//     lat: 19.428471,
+//     id: 3530597,
+//     country: "MX",
+//   },
+//  Guadalajara: {
+//     lon: -103.333328,
+//     lat: 20.66667,
+//     id: 4005539,
+//     country: "MX",
+//   },
+// Sydney: {
+//     lon: 151.207321,
+//     lat: -33.867851,
+//     id: 2147714,
+//     country: "AU",
+//   },
+// Bangkok: {
+//     lon: 100.51667,
+//     lat: 13.75,
+//     id: 1609350,
+//     country: "TH",
+//   },
+// };
+//
+
+// const citiesDropdown = document.querySelector('#city-selectors');
+// let selectedCity = citiesDropdown.value;
+//
+// let latSelectedClock = citiescord[selectedCity].lat;
+// let lonSelectedClock = citiescord[selectedCity].lon;
 
 let offsetSydney = '';
 
-fetch(' https://maps.googleapis.com/maps/api/timezone/json?location=-33.8675,151.207&timestamp=1331161200&key=AIzaSyANpHwd0ZvP_2qrvqEEp-5l6NS3LkwxSbY ')
+fetch(`https://maps.googleapis.com/maps/api/timezone/json?location=35.6895,135.6917&timestamp=1331161200&key=AIzaSyANpHwd0ZvP_2qrvqEEp-5l6NS3LkwxSbY `)
 .then(function(response) {
   return response.json();
 })
@@ -303,6 +371,7 @@ setDateSydney();
 
 // Sydney Clock ENDS---------------------------------------------------------------------------------------------------------------------------------------------- -->
 // London wheather Starts---------------------------------------------------------------------------------------------------------------------------------------------- -->
+
 let wheather = '';
 let wheatherfahrenheit = '';
 let lat = 33;
@@ -310,9 +379,6 @@ let lon = 151;
 
 let latTokyo = 35.6;
 let lonTokyo = 135.7;
-
-let latSydney = -33.8;
-let lonSydney = 151.2;
 
 function getWheatherLondon() {
 fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&APPID=261e313010ab3d43b1344ab9eba64cfa`)
@@ -352,21 +418,55 @@ fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${latTokyo}&lon=${lonT
 wheatherSydney = '';
 wheatherSydneyF = '';
 
-function getWheatherSedney() {
-fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${latSydney}&lon=${lonSydney}&units=metric&APPID=261e313010ab3d43b1344ab9eba64cfa`)
+
+function getWheatherSelected() {
+  let citiescord = {
+    Mexico: {
+      lon: -99.127663,
+      lat: 19.428471,
+      id: 3530597,
+      country: "MX",
+    },
+   Guadalajara: {
+      lon: -103.333328,
+      lat: 20.66667,
+      id: 4005539,
+      country: "MX",
+    },
+  Sydney: {
+      lon: 151.207321,
+      lat: -33.867851,
+      id: 2147714,
+      country: "AU",
+    },
+  Bangkok: {
+      lon: 100.51667,
+      lat: 13.75,
+      id: 1609350,
+      country: "TH",
+    },
+  };
+
+  const citiesDropdown = document.querySelector('#city-selectors');
+  let selectedCity = citiesDropdown.value;
+  let latSelected = citiescord[selectedCity].lat;
+  let lonSelected = citiescord[selectedCity].lon;
+  fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${latSelected}&lon=${lonSelected}&units=metric&APPID=261e313010ab3d43b1344ab9eba64cfa`)
   .then(function(response) {
     return response.json();
   })
   .then(function(data) {
     wheatherSydney = data.main.temp ;
-    document.querySelector(".tempSedney").innerHTML = `${Math.round(wheatherSydney)}`;
+    document.querySelector(".tempSelected").innerHTML = `${Math.round(wheatherSydney)}`;
     let wheatherSydneyF = (wheatherSydney * 1.8)+32;
-    document.querySelector(".tempFSedney").innerHTML = `${Math.round(wheatherSydneyF)}`;
+    document.querySelector(".tempFSelected").innerHTML = `${Math.round(wheatherSydneyF)}`;
   });
 }
-  getWheatherSedney();
-  setInterval(getWheatherMetricSedney, 600000);
-
+  getWheatherSelected();
+  setInterval(getWheatherSelected, 600000);
+const submit = document.querySelectorAll('option');
+submit.forEach(option => option.addEventListener('click', getWheatherSelected));
+console.log(submit);
 </script>
 </body>
 </html>
