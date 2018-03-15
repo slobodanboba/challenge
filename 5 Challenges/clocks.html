@@ -304,43 +304,41 @@ setInterval(setDateTokio, 1000);
 setDateTokio();
 // TOKIO Clock Ends---------------------------------------------------------------------------------------------------------------------------------------------- -->
 // SYDNEY Clock Starts---------------------------------------------------------------------------------------------------------------------------------------------- -->
-// let citiescord = {
-//   Mexico: {
-//     lon: -99.127663,
-//     lat: 19.428471,
-//     id: 3530597,
-//     country: "MX",
-//   },
-//  Guadalajara: {
-//     lon: -103.333328,
-//     lat: 20.66667,
-//     id: 4005539,
-//     country: "MX",
-//   },
-// Sydney: {
-//     lon: 151.207321,
-//     lat: -33.867851,
-//     id: 2147714,
-//     country: "AU",
-//   },
-// Bangkok: {
-//     lon: 100.51667,
-//     lat: 13.75,
-//     id: 1609350,
-//     country: "TH",
-//   },
-// };
-//
-
-// const citiesDropdown = document.querySelector('#city-selectors');
-// let selectedCity = citiesDropdown.value;
-//
-// let latSelectedClock = citiescord[selectedCity].lat;
-// let lonSelectedClock = citiescord[selectedCity].lon;
+let citiescord = {
+  Mexico: {
+    lon: -99.127663,
+    lat: 19.428471,
+    id: 3530597,
+    country: "MX",
+  },
+ Guadalajara: {
+    lon: -103.333328,
+    lat: 20.66667,
+    id: 4005539,
+    country: "MX",
+  },
+Sydney: {
+    lon: 151.207321,
+    lat: -33.867851,
+    id: 2147714,
+    country: "AU",
+  },
+Bangkok: {
+    lon: 100.51667,
+    lat: 13.75,
+    id: 1609350,
+    country: "TH",
+  },
+};
 
 let offsetSydney = '';
+function changeTime() {
+const citiesDropdown = document.querySelector('#city-selectors');
+let selectedCity = citiesDropdown.value;
+let latSelectedClock = citiescord[selectedCity].lat;
+let lonSelectedClock = citiescord[selectedCity].lon;
 
-fetch(`https://maps.googleapis.com/maps/api/timezone/json?location=35.6895,135.6917&timestamp=1331161200&key=AIzaSyANpHwd0ZvP_2qrvqEEp-5l6NS3LkwxSbY `)
+fetch(`https://maps.googleapis.com/maps/api/timezone/json?location=${latSelectedClock},${lonSelectedClock}&timestamp=1331161200&key=AIzaSyANpHwd0ZvP_2qrvqEEp-5l6NS3LkwxSbY `)
 .then(function(response) {
   return response.json();
 })
@@ -348,6 +346,7 @@ fetch(`https://maps.googleapis.com/maps/api/timezone/json?location=35.6895,135.6
   offsetSydney = sydney.rawOffset;
   console.log(offsetSydney);
 });
+};
 const secondHandSydney = document.querySelector('.second-handSydney');
 const minsHandSydney = document.querySelector('.min-handSydney');
 const hourHandSydney = document.querySelector('.hour-handSydney');
@@ -366,9 +365,11 @@ function setDateSydney() {
   console.log("Sydney",hourDegreesSydney);
   hourHandSydney.style.transform = `rotate(${hourDegreesSydney}deg)`;
 }
+changeTime()
 setInterval(setDateSydney, 1000);
 setDateSydney();
-
+const changTimeClick = document.querySelectorAll('option');
+changTimeClick.forEach(option => option.addEventListener('click', changeTime));
 // Sydney Clock ENDS---------------------------------------------------------------------------------------------------------------------------------------------- -->
 // London wheather Starts---------------------------------------------------------------------------------------------------------------------------------------------- -->
 
