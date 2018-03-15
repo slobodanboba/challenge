@@ -16,7 +16,8 @@
         <div class="hours hour12"></div>
       <div class="city">London</div>
     </div>
-    <div class="temp-london"><span class="text-london">Now <span class="tempLondon"></span><span>°C</span>|<span class="tempFLondon"></span><span>°F</span></div>
+    <div class="temp-info temp-london"><span class="text-london"><span class="tempLondon"></span><span>°C</span>|<span class="tempFLondon"></span><span>°F</span></div>
+    <div class="icons icon-London"></div>
     </div>
     <div class="clock tokyo-clock">
       <div class="clock-face">
@@ -29,7 +30,8 @@
         <div class="hours hour12"></div>
         <div class="city Tokyocity">Tokyo</div>
       </div>
-      <div class="temp-tokyo"><span class="text-london">Now <span class="tempTokyo"></span><span>°C</span>|<span class="tempFTokyo"></span><span>°F</span></div>
+      <div class="temp-info temp-tokyo"><span class="text-london"><span class="tempTokyo"></span><span>°C</span>|<span class="tempFTokyo"></span><span>°F</span></div>
+      <div class="icons icon-Tokyo"></div>
     </div>
     <div class="clock sydney-clock">
       <div class="clock-face">
@@ -50,7 +52,8 @@
              </select>
            </div>
         </div>
-      <div class="temp-sydney"><span class="text-london">Now <span class="tempSelected"></span><span>°C</span>|<span class="tempFSelected"></span><span>°F</span></div>
+      <div class="temp-info temp-sydney"><span class="text-london"><span class="tempSelected"></span><span>°C</span>|<span class="tempFSelected"></span><span>°F</span></div>
+      <div class="icons icon-Selcted"></div>
     </div>
 
   <style>
@@ -102,10 +105,11 @@
       color: black;
       text-align: center;
     }
-    .selected-city {
-
-
-    }
+     .icons {
+       display: inline;
+       position: relative;
+       right: 30%;
+     }
     .Tokyocity {
       left: 33%;
     }
@@ -220,6 +224,11 @@
       font-size: 30px;
       font-weight: 600;
       color: rgba(255,255,255,0.7);
+    }
+    .temp-info {
+      position: relative;
+      left: 10%;
+
     }
 </style>
 
@@ -391,6 +400,10 @@ fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&unit
     document.querySelector(".tempLondon").innerHTML = `${Math.round(wheatherLondon)}`;
     let wheatherLondonF = (wheatherLondon * 1.8)+32;
     document.querySelector(".tempFLondon").innerHTML = `${Math.round(wheatherLondonF)}`
+    wheatherIconLondon = data.weather[0].icon;
+    console.clear();
+    console.log("wheatherIconLondon",wheatherIconLondon);
+    document.querySelector(".icon-London").innerHTML = `<img class="icon-Img-London" src="../content/${wheatherIconLondon}.png" width="70px" height="70px">`;
   });
 }
   getWheatherLondon();
@@ -409,6 +422,8 @@ fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${latTokyo}&lon=${lonT
     document.querySelector(".tempTokyo").innerHTML = `${Math.round(wheatherTokyo)}`;
     let wheatherTokyoF = (wheatherTokyo * 1.8)+32;
     document.querySelector(".tempFTokyo").innerHTML = `${Math.round(wheatherTokyoF)}`;
+    wheatherIconTokyo = data.weather[0].icon;
+    document.querySelector(".icon-Tokyo").innerHTML = `<img class="icon-Img-Tokyo" src="../content/${wheatherIconTokyo}.png" width="70px" height="70px">`;
   });
 }
   getWheatherTokyo();
@@ -447,7 +462,6 @@ function getWheatherSelected() {
       country: "TH",
     },
   };
-
   const citiesDropdown = document.querySelector('#city-selectors');
   let selectedCity = citiesDropdown.value;
   let latSelected = citiescord[selectedCity].lat;
@@ -461,6 +475,8 @@ function getWheatherSelected() {
     document.querySelector(".tempSelected").innerHTML = `${Math.round(wheatherSydney)}`;
     let wheatherSydneyF = (wheatherSydney * 1.8)+32;
     document.querySelector(".tempFSelected").innerHTML = `${Math.round(wheatherSydneyF)}`;
+    wheatherIconSelected = data.weather[0].icon;
+    document.querySelector(".icon-Selcted").innerHTML = `<img class="icon-Img-Selected" src="../content/${wheatherIconSelected}.png" width="70px" height="70px">`;
   });
 }
   getWheatherSelected();
