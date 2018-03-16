@@ -1,0 +1,220 @@
+html {
+  font-family:'helvetica neue';
+  text-align: center;
+  font-size: 10px;
+}
+.body-container {
+  background: url(../content/pexels-photo-68806.jpg);
+  background-repeat:repeat-x;
+  background-size: cover;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+}
+.city {
+  position: absolute;
+  bottom: 30px;
+  left: 31%;
+  text-shadow: 1px 1px rgba(255,255,255,0.2);
+  font-size: 30px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.9);
+  z-index: auto;
+}
+select {
+  bottom: 7px;
+  right: 22%;
+  padding: 0px;
+  margin: 0px;
+  position: relative;
+  font-size: 30px;
+  text-shadow: 1px 1px rgba(255,255,255,0.4);
+  background: rgba(255, 255, 255, 0.0);
+  border: none;
+  color: rgba(255,255,255,0.9);
+  font-weight: 600;
+  font-family:'helvetica neue';
+  text-align: center;
+}
+option {
+  bottom: 7px;
+  right: 22%;
+  padding: 0px;
+  margin: 0px;
+  position: relative;
+  font-size: 30px;
+  background-color: black;
+  border: none;
+  color: black;
+  text-align: center;
+}
+.results-list {
+display:grid;
+background: white;
+
+}
+
+ .icons {
+   display: inline;
+   position: relative;
+   right: 30%;
+ }
+.Tokyocity {
+  left: 33%;
+}
+.clock {
+  width: 25rem;
+  height: 25rem;
+  border:5px solid rgba(255,255,255,0.9);
+  border-radius:50%;
+  margin:50px auto;
+  position: relative;
+  padding:2rem;
+  background: rgba(0, 0, 0, 0.3);
+  box-shadow:
+  0 0 0 4px rgba(0,0,0,0.1),
+  inset 0 0 0 3px #EFEFEF,
+  inset 0 0 10px black,
+  0 0 10px rgba(0,0,0,0.2);
+}
+.clock-face {
+  position:relative;
+  width: 100%;
+  height: 100%;
+  transform: translateY(-3px); /* account for the height of the clock hands */
+}
+.hour-hand {
+  width:50%;
+  height:8px;
+  background:rgba(0,0,0,0.8);
+  position: absolute;
+  top:50%;
+  left: 10%;
+  transform-origin: 80%;
+  transform: rotate(90deg);
+  transition: all 0.05s;
+  transition-timing-function: cubic-bezier(0.1, 2.7, 0.58, 1);
+  border-radius:50%;
+  box-shadow:
+  inset 0 0 0 1px rgba(255,255,255,0.5),
+  0 0 1px rgba(255,255,255,0.2);
+  z-index: 7;
+}
+.min-hand {
+  width:50%;
+  height:5px;
+  background:rgba(0,0,0,0.8);
+  position: absolute;
+  top:50%;
+  left: 10%;
+  transform-origin: 80%;
+  transform: rotate(90deg);
+  transition: all 0.05s;
+  transition-timing-function: cubic-bezier(0.1, 2.7, 0.58, 1);
+  border-radius:50%;
+  box-shadow:
+  inset 0 0 0 1px rgba(255,255,255,0.5),
+  0 0 1px rgba(255,255,255,0.2);
+  z-index: 8;
+}
+.second-hand {
+  width:50%;
+  height:3px;
+  background:rgba(255,0,0,0.8);
+  position: absolute;
+  top:50%;
+  left: 10%;
+  transform-origin: 80%;
+  transform: rotate(90deg);
+  transition: all 0.05s;
+  transition-timing-function: cubic-bezier(0.1, 2.7, 0.58, 1);
+  border-radius:80%;
+  box-shadow:
+  0 0 0 1px rgba(255,255,255,0.1),
+  inset 0 0 0 1px rgba(255,255,255,0.1),
+  0 0 1px rgba(255,255,255,0.1);
+  z-index: 9;
+}
+.dot-center {
+  width:10px;
+  height:10px;
+  background:black;
+  position: relative;
+  top:calc(50% - 3px);
+  left:calc(50% - 5px);
+  border-radius:50%;
+  z-index:10;
+  box-shadow:
+  0 0 0 1px rgba(255,255,255,0.2),
+  inset 0 0 0 1px rgba(255,255,255,0.2),
+  0 0 1px rgba(255,255,255,0.2);
+}
+.hours {
+  width:7%;
+  height:8px;
+  background:black;
+  position: absolute;
+  transform: rotate(90deg);
+  background:rgba(0,0,0,0.8);
+  border-radius:50%;
+  box-shadow:
+  0 0 0 1px rgba(255,255,255,0.2),
+  inset 0 0 0 1px rgba(255,255,255,0.2),
+  0 0 1px rgba(255,255,255,0.2);
+}
+.hour3 {
+  transform: rotate(0deg);
+  top:50%;
+  left:96%;
+}
+.hour6 {
+  padding: 0px;
+  margin: 0px;
+  transform: rotate(90deg);
+  top:100%;
+  left:46%;
+}
+.hour9 {
+  transform: rotate(0deg);
+  top:50%;
+  left:-3%;
+}
+.hour12 {
+  padding: 0px;
+  margin: 0px;
+  transform: rotate(90deg);
+  top:0%;
+  left:46%;
+}
+.temp {
+  font-size: 30px;
+}
+.temp-london {
+    position: relative;
+    top: 50px;
+    font-size: 30px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.85);
+    text-shadow: 1px 1px rgba(255,255,255,0.2);
+}
+.temp-tokyo {
+  position: relative;
+  top: 50px;
+  font-size: 30px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.85);
+  text-shadow: 1px 1px rgba(255,255,255,0.2);
+}
+.temp-sydney {
+  position: relative;
+  top: 50px;
+  font-size: 30px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.85);
+  text-shadow: 1px 1px rgba(255,255,255,0.2);
+}
+.temp-info {
+  position: relative;
+  left: 10%;
+
+}
