@@ -2,9 +2,9 @@ html {
   font-family:'helvetica neue';
   text-align: center;
   font-size: 10px;
+  background:#0F334A ;
 }
 .body-container {
-  background: url(../content/pexels-photo-68806.jpg);
   background-repeat:repeat-x;
   background-size: cover;
   display: grid;
@@ -48,9 +48,14 @@ option {
   color: black;
   text-align: center;
 }
+span {
+  font-size: 30px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.85);
+  text-shadow: 1px 1px rgba(255,255,255,0.2);
+}
 .results-list {
 display:grid;
-background: white;
 
 }
 
@@ -70,7 +75,7 @@ background: white;
   margin:50px auto;
   position: relative;
   padding:2rem;
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(255,255,255,0.2);
   box-shadow:
   0 0 0 4px rgba(0,0,0,0.1),
   inset 0 0 0 3px #EFEFEF,
@@ -186,35 +191,27 @@ background: white;
   top:0%;
   left:46%;
 }
-.temp {
-  font-size: 30px;
-}
+
 .temp-london {
     position: relative;
     top: 50px;
-    font-size: 30px;
-    font-weight: 600;
-    color: rgba(255,255,255,0.85);
-    text-shadow: 1px 1px rgba(255,255,255,0.2);
 }
 .temp-tokyo {
   position: relative;
   top: 50px;
-  font-size: 30px;
-  font-weight: 600;
-  color: rgba(255,255,255,0.85);
-  text-shadow: 1px 1px rgba(255,255,255,0.2);
 }
 .temp-sydney {
   position: relative;
   top: 50px;
-  font-size: 30px;
-  font-weight: 600;
-  color: rgba(255,255,255,0.85);
-  text-shadow: 1px 1px rgba(255,255,255,0.2);
 }
 .temp-info {
   position: relative;
   left: 10%;
+}
 
+.tempAllWorld {
+  position: relative;
+  top: 50px;
+  font-size: 20px;
+  font-weight: 600;
 }

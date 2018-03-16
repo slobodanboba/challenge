@@ -57,8 +57,23 @@
              </select>
            </div>
         </div>
-      <div class="temp-info temp-sydney"><span class="text-london"><span class="tempSelected"></span><span>°C</span>|<span class="tempFSelected"></span><span>°F</span></div>
+      <div class="temp-info temp-sydney"><span class="text-london"><span class="tempSelected"></span><span class="temp">°C</span>|<span class="tempFSelected"></span><span class="temp">°F</span></div>
       <div class="icons icon-Selcted"></div>
+    </div>
+    <div class="clock World-clock">
+      <div class="clock-face">
+        <div class="hand hour-hand hour-handWorld"></div>
+        <div class="hand min-hand min-handWorld"></div>
+        <div class="hand second-hand second-handWorld"></div>
+        <div class="dot-center"></div>
+        <div class="hours hour3"></div>
+        <div class="hours hour6"></div>
+        <div class="hours hour9"></div>
+        <div class="hours hour12"></div>
+        <div class="city World-city">World</div>
+      </div>
+      <div class="temp-info tempAllWorld"><span class="text-london"><span class="temp temp-AllWorld"></span><span>°C</span>|<span class="temp tempF-AllWorld"></span><span>°F</span></div>
+      <div class="icons icon-AllWorld"></div>
     </div>
     <div class="canvas-body">
     <img src="../content/Earthmap.jpg" class="world-map" width="1000px" height="500px">
@@ -67,73 +82,12 @@
       <ul class="list-ul"></ul>
     <div>
 
-      <div class="clock tokyo-clock">
-        <div class="clock-face">
-          <div class="hand hour-hand hour-handTokio"></div>
-          <div class="hand min-hand min-handTokio"></div>
-          <div class="hand second-hand second-handTokio"></div>
-          <div class="dot-center"></div>
-          <div class="hours hour3"></div>
-          <div class="hours hour6"></div>
-          <div class="hours hour9"></div>
-          <div class="hours hour12"></div>
-          <div class="city Tokyocity">World</div>
-        </div>
-        <div class="temp-info AllWorld-container"><span class="text-london"><span class="temp-AllWorld"></span><span>°C</span>|<span class="tempF-AllWorld"></span><span>°F</span></div>
-        <div class="icons icon-AllWorld"></div>
-      </div>
+
    </div>
   <style>
 </style>
 <script>
 //World map Starts here -------------------------------------------------------------------------------------------------------------------------------------------------
-let imageOffsetTop = 0;
-let imageOffsetLeft =0;
-let imageLon = 0;
-let imageLat = 0;
-let imageTime = 0;
-let positionY = 0;
-let positionX = 0;
-let image = document.querySelector(".canvas-body")
-
-function scroll() {
-  imageOffsetTop = image.offsetTop;
-  imageOffsetLeft = image.offsetLeft;
-  console.log(imageOffsetTop);
-}
-scroll();
-window.addEventListener("scroll", scroll);
-window.addEventListener("scroll", scroll);
-
-function imageClick(e) {
-  positionY = e.pageY - imageOffsetTop ;
-  positionX = e.pageX - imageOffsetLeft ;
-  imageLat = (50 - positionY/5) * 1.8;
-  imageLon = (positionX/10 - 50) * 3.6;
-  console.log(imageLat , imageLon);
-  fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${imageLat}&lon=${imageLon}&units=metric&APPID=261e313010ab3d43b1344ab9eba64cfa`)
-    .then(function(response) {
-      return response.json();
-    })
-    .then(function(data) {
-      wheatherAllWorld = data.main.temp ;
-      document.querySelector(".temp-AllWorld").innerHTML = `${Math.round(wheatherAllWorld)}`;
-      let weatherAllWorldF = (wheatherAllWorld * 1.8)+32;
-      document.querySelector(".tempF-AllWorld").innerHTML = `${Math.round(weatherAllWorldF)}`;
-      wheatherIconTokyo = data.weather[0].icon;
-      document.querySelector(".icon-AllWorld").innerHTML = `<img class="icon-Img-Tokyo" src="../content/${wheatherIconTokyo}.png" width="70px" height="70px">`;
-    });
-}
-
-
-image.addEventListener("click", imageClick);
-
-function displayLonLat(e) {
-  console.log(e);
-}
-
-image.addEventListener("mousemove", displayLonLat)
-
 
 function getWheatherTokyo() {
 fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${latTokyo}&lon=${lonTokyo}&units=metric&APPID=261e313010ab3d43b1344ab9eba64cfa`)
@@ -284,6 +238,83 @@ setDateSydney();
 const changTimeClick = document.querySelectorAll('option');
 changTimeClick.forEach(option => option.addEventListener('click', changeTime));
 // Sydney Clock ENDS---------------------------------------------------------------------------------------------------------------------------------------------- -->
+let imageOffsetTop = 0;
+let imageOffsetLeft =0;
+let imageLon = 0;
+let imageLat = 0;
+let imageTime = 0;
+let positionY = 0;
+let positionX = 0;
+let image = document.querySelector(".canvas-body")
+function scroll() {
+  imageOffsetTop = image.offsetTop;
+  imageOffsetLeft = image.offsetLeft;
+  console.log(imageOffsetTop);
+}
+scroll();
+window.addEventListener("scroll", scroll);
+window.addEventListener("scroll", scroll);
+function imageClick(e) {
+  positionY = e.pageY - imageOffsetTop ;
+  positionX = e.pageX - imageOffsetLeft ;
+  imageLat = (50 - positionY/5) * 1.8;
+  imageLon = (positionX/10 - 50) * 3.6;
+  console.log(imageLat , imageLon);
+  fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${imageLat}&lon=${imageLon}&units=metric&APPID=261e313010ab3d43b1344ab9eba64cfa`)
+    .then(function(response) {
+      return response.json();
+    })
+    .then(function(data) {
+      wheatherAllWorld = data.main.temp ;
+      document.querySelector(".temp-AllWorld").innerHTML = `${Math.round(wheatherAllWorld)}`;
+      let weatherAllWorldF = (wheatherAllWorld * 1.8)+32;
+      document.querySelector(".tempF-AllWorld").innerHTML = `${Math.round(weatherAllWorldF)}`;
+      wheatherIconTokyo = data.weather[0].icon;
+      document.querySelector(".icon-AllWorld").innerHTML = `<img class="icon-Img-Tokyo" src="../content/${wheatherIconTokyo}.png" width="70px" height="70px">`;
+    });
+}
+image.addEventListener("click", imageClick);
+
+function displayLonLat(e) {
+  console.log(e);
+}
+
+image.addEventListener("mousemove", displayLonLat)
+
+
+let offsetWorld = '';
+
+function getTimeWorld(){
+fetch(` https://maps.googleapis.com/maps/api/timezone/json?location=${imageLat},${imageLon}&timestamp=1331161200&key=AIzaSyANpHwd0ZvP_2qrvqEEp-5l6NS3LkwxSbY `)
+  .then(function(response) {
+    return response.json();
+  })
+  .then(function(world) {
+     offsetWorld = world.rawOffset;
+  });
+}
+
+const secondHandWorld = document.querySelector('.second-handWorld');
+const minsHandWorld = document.querySelector('.min-handWorld');
+const hourHandWorld = document.querySelector('.hour-handWorld');
+function setDateWorld() {
+
+  const nowWorld = new Date();
+  const secondsWorld = nowWorld.getSeconds();
+  const secondsDegreesWorld = ((secondsWorld / 60) * 360) + 90;
+  secondHandWorld.style.transform = `rotate(${secondsDegreesWorld}deg)`;
+  const minsWorld = nowWorld.getMinutes();
+  const minsDegreesWorld = ((minsWorld / 60) * 360) + ((secondsWorld / 60)*6) + 90;
+  minsHandTokio.style.transform = `rotate(${minsDegreesWorld}deg)`;
+  const hourWorld = nowWorld.getHours();
+  const offsetHoursWorld = (offsetWorld / 3600);
+  const guadalajaraOffsetHours = (guadalajaraOffset / 3600);
+  const hourDegreesWorld = (((hourWorld + offsetHoursWorld + guadalajaraOffsetHours) / 12) * 360) + ((minsWorld/60)*30) + 90;
+  hourHandWorld.style.transform = `rotate(${hourDegreesWorld}deg)`;
+}
+setInterval(setDateWorld, 1000);
+setDateWorld();
+image.addEventListener("click", getTimeWorld);
 // London wheather Starts---------------------------------------------------------------------------------------------------------------------------------------------- -->
 let wheather = '';
 let wheatherfahrenheit = '';
@@ -353,7 +384,6 @@ function getWheatherSelected() {
   setInterval(getWheatherSelected, 600000);
 const select = document.querySelectorAll('option');
 select.forEach(option => option.addEventListener('click', getWheatherSelected));
-console.log(submit);
 </script>
 </body>
 </html>
