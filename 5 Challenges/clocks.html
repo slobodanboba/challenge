@@ -32,7 +32,12 @@
         <div class="hours hour6"></div>
         <div class="hours hour9"></div>
         <div class="hours hour12"></div>
-        <div class="city Tokyocity">Tokyo</div>
+        <div class="city Tokyocity">
+          <form action="/action_page.php">
+           <input type="text" name="City"><br>
+           <input type="submit" value="Submit">
+           </form>
+        </div>
       </div>
       <div class="temp-info temp-tokyo"><span class="text-london"><span class="tempTokyo"></span><span>°C</span>|<span class="tempFTokyo"></span><span>°F</span></div>
       <div class="icons icon-Tokyo"></div>
@@ -281,7 +286,6 @@ function displayLonLat(e) {
 
 image.addEventListener("mousemove", displayLonLat)
 
-
 let offsetWorld = '';
 
 function getTimeWorld(){
@@ -293,12 +297,10 @@ fetch(` https://maps.googleapis.com/maps/api/timezone/json?location=${imageLat},
      offsetWorld = world.rawOffset;
   });
 }
-
 const secondHandWorld = document.querySelector('.second-handWorld');
 const minsHandWorld = document.querySelector('.min-handWorld');
 const hourHandWorld = document.querySelector('.hour-handWorld');
 function setDateWorld() {
-
   const nowWorld = new Date();
   const secondsWorld = nowWorld.getSeconds();
   const secondsDegreesWorld = ((secondsWorld / 60) * 360) + 90;
