@@ -21,6 +21,7 @@ html {
   color: rgba(255,255,255,0.9);
   z-index: auto;
 }
+
 select {
   bottom: 7px;
   right: 22%;
@@ -53,6 +54,22 @@ span {
   font-weight: 600;
   color: rgba(255,255,255,0.85);
   text-shadow: 1px 1px rgba(255,255,255,0.2);
+
+}
+
+input {
+  position: relative;
+  top: 60%;
+  left: -22%;
+  background: rgba(255, 255, 255, 0.5);
+  font-weight: 800;
+  text-transform: capitalize;
+  max-width: 150px;
+}
+
+.input {
+  font-size: 50px;
+  font-weight: 400;
 }
 .results-list {
 display:grid;
@@ -64,9 +81,7 @@ display:grid;
    position: relative;
    right: 30%;
  }
-.Tokyocity {
-  left: 33%;
-}
+
 .clock {
   width: 25rem;
   height: 25rem;
