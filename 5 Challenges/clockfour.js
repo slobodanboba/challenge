@@ -7,6 +7,9 @@ let positionY = 0;
 let positionX = 0;
 let worldPlace = '';
 countryShortName = '';
+let suffix = "px";
+
+
 let image = document.querySelector(".canvas-body");
 
 function scroll() {
@@ -17,6 +20,29 @@ function scroll() {
 scroll();
 window.addEventListener("scroll", scroll);
 window.addEventListener("scroll", scroll);
+
+function displayLonLat(e) {
+  positionY = e.pageY - imageOffsetTop ;
+  positionX = e.pageX - imageOffsetLeft ;
+  imageLat = (50 - positionY/5) * 1.8;
+  imageLon = (positionX/10 - 50) * 3.6;
+  document.documentElement.style.setProperty("--pageX", e.pageX + suffix);
+  document.documentElement.style.setProperty(`--pageY`, e.pageY + suffix);
+  document.querySelector('.spanLat').innerHTML = Math.round(imageLat);
+  document.querySelector('.spanLon').innerHTML = Math.round(imageLon);
+}
+
+function displayOn() {
+  document.querySelector('.movingDiv').style.display = "block";
+}
+
+function displayOff() {
+  document.querySelector('.movingDiv').style.display = "none";
+}
+
+image.addEventListener("mousemove", displayLonLat);
+image.addEventListener("mouseover", displayOn);
+image.addEventListener("mouseout", displayOff);
 
 function imageClick(e) {
   positionY = e.pageY - imageOffsetTop ;
@@ -42,7 +68,7 @@ function imageClick(e) {
       return response.json();
     })
     .then(function(cityName) {
-      if (cityName.results[0].address_components[1] == undefined) {
+      if (cityName.results[0] == undefined || cityName.results[0].address_components[1] == undefined)  {
         worldPlace = 'MISSING PLACE NAME';
         document.querySelector(".World-city").innerHTML = `${worldPlace}`;
         countryShortName = '';
@@ -59,11 +85,7 @@ function imageClick(e) {
 
 image.addEventListener("click", imageClick);
 
-function displayLonLat(e) {
-  console.log(e);
-}
 
-image.addEventListener("mousemove", displayLonLat)
 
 let offsetWorld = '';
 

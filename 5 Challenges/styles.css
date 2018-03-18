@@ -1,3 +1,9 @@
+:root {
+  --pageX: 0;
+  --pageY: 0;
+}
+
+
 html {
   font-family:'helvetica neue';
   text-align: center;
@@ -255,4 +261,21 @@ input {
   top: 50px;
   font-size: 20px;
   font-weight: 600;
+}
+.movingDiv {
+  width: auto;
+  height: auto;
+  display: none;
+  position: absolute;
+  top: var(--pageY);
+  left:var(--pageX);
+  background: rgba(0,0,0,0.2);
+  padding: 1px;
+  margin: 10px;
+}
+.LonLat{
+  font-size: 12px;
+  text-align: left;
+  padding-top: 4px;
+  margin-left: 0px;
 }
