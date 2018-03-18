@@ -17,10 +17,10 @@
         <div class="hours hour6"></div>
         <div class="hours hour9"></div>
         <div class="hours hour12"></div>
-      <div class="city">London</div>
-    </div>
-    <div class="temp-info temp-london"><span class="text-london"><span class="tempLondon"></span><span>°C</span>|<span class="tempFLondon"></span><span>°F</span></div>
-    <div class="icons icon-London"></div>
+        <div class="city">London</div>
+      </div>
+      <div class="temp-info temp-london"><span class="text-london"><span class="tempLondon"></span><span>°C</span>|<span class="tempFLondon"></span><span>°F</span></div>
+      <div class="icons icon-London"></div>
     </div>
     <div class="clock tokyo-clock">
       <div class="clock-face">
@@ -34,9 +34,9 @@
         <div class="hours hour12"></div>
         <div class="city InputCity">
           <form style="input-city" id="form">
-             <input style="input input-value" type="text" name="inputCity" value="City"><br>
-             <!-- <input style="input input-submit" type="submit" value="Submit"> -->
-           </form>
+            <input style="input input-value" type="text" name="inputCity" value="City"><br>
+            <!-- <input style="input input-submit" type="submit" value="Submit"> -->
+          </form>
         </div>
       </div>
       <div class="temp-info temp-tokyo"><span class="text-london"><span class="tempTokyo"></span><span>°C</span>|<span class="tempFTokyo"></span><span>°F</span></div>
@@ -44,24 +44,32 @@
     </div>
     <div class="clock sydney-clock">
       <div class="clock-face">
-        <div class="hand hour-hand hour-handSydney"></div>
-        <div class="hand min-hand min-handSydney"></div>
-        <div class="hand second-hand second-handSydney"></div>
+        <div class="hand hour-hand hour-handSelected"></div>
+        <div class="hand min-hand min-handSelected"></div>
+        <div class="hand second-hand second-handSelected"></div>
         <div class="dot-center"></div>
         <div class="hours hour3"></div>
         <div class="hours hour6"></div>
         <div class="hours hour9"></div>
         <div class="hours hour12"></div>
-          <div class="city">
-            <select class="selected-cityname" name="city-selector" id="city-selectors">
-               <option class="selected-city" value="Guadalajara">Select A City</option>
-               <option class="selected-city" value="Sydney">Sydney</option>
-               <option class="selected-city" value="Bangkok">Bangkok</option>
-               <option class="selected-city" value="Guadalajara">Guadalajara</option>
-               <option class="selected-city" value="Mexico">Mexico</option>
-             </select>
-           </div>
+        <div class="city">
+          <select class="selected-cityname" name="city-selector" id="city-selectors">
+            <option class="selected-city" value="Guadalajara">Select A City</option>
+            <option class="selected-city" value="Cancun">Cancun</option>
+            <option class="selected-city" value="Mexico City">Mexico</option>
+            <option class="selected-city" value="Hermosillo">Hermosillo</option>
+            <option class="selected-city" value="Sayulita">Sayulita</option>
+            <option class="selected-city" value="Sydney">Sydney</option>
+            <option class="selected-city" value="LondonUK">London</option>
+            <option class="selected-city" value="Bangkok">Bangkok</option>
+            <option class="selected-city" value="Belgrade">Belgrade</option>
+            <option class="selected-city" value="Novi Sad">Novi Sad</option>
+            <option class="selected-city" value="New York">New York</option>
+            <option class="selected-city" value="LA">Los Angeles</option>
+            <option class="selected-city" value="Chicago">Chicago</option>
+          </select>
         </div>
+      </div>
       <div class="temp-info temp-sydney"><span class="text-london"><span class="tempSelected"></span><span class="temp">°C</span>|<span class="tempFSelected"></span><span class="temp">°F</span></div>
       <div class="icons icon-Selcted"></div>
     </div>
@@ -81,396 +89,20 @@
       <div class="icons icon-AllWorld"></div>
     </div>
     <div class="canvas-body">
-    <img src="../content/Earthmap.jpg" class="world-map" width="1000px" height="500px">
+      <img src="../content/Earthmap.jpg" class="world-map" width="1000px" height="500px">
     </div>
     <div class="results-list">
       <ul class="list-ul"></ul>
-    <div>
-   </div>
-  <style>
-</style>
-<script>
-//World map Starts here -------------------------------------------------------------------------------------------------------------------------------------------------
-
-function getWheatherTokyo() {
-fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${latTokyo}&lon=${lonTokyo}&units=metric&APPID=261e313010ab3d43b1344ab9eba64cfa`)
-  .then(function(response) {
-    return response.json();
-  })
-  .then(function(data) {
-    wheatherTokyo = data.main.temp ;
-    document.querySelector(".tempTokyo").innerHTML = `${Math.round(wheatherTokyo)}`;
-    let wheatherTokyoF = (wheatherTokyo * 1.8)+32;
-    document.querySelector(".tempFTokyo").innerHTML = `${Math.round(wheatherTokyoF)}`;
-    wheatherIconTokyo = data.weather[0].icon;
-    document.querySelector(".icon-Tokyo").innerHTML = `<img class="icon-Img-Tokyo" src="../content/${wheatherIconTokyo}.png" width="70px" height="70px">`;
-  });
-}
-//World map Ends here -------------------------------------------------------------------------------------------------------------------------------------------------
-//  LONDON Clock starts---------------------------------------------------------------------------------------------------------------------------------------------- -->
-let offset = '';
-let guadalajaraOffset = '';
-fetch(' https://maps.googleapis.com/maps/api/timezone/json?location=51.5073,-0.1277&timestamp=1331161200&key=AIzaSyANpHwd0ZvP_2qrvqEEp-5l6NS3LkwxSbY ')
-  .then(function(response) {
-    return response.json();
-  })
-  .then(function(myJson) {
-     offset = myJson.rawOffset;
-  });
-  fetch(' https://maps.googleapis.com/maps/api/timezone/json?location=20.6596,-103.3496&timestamp=1331161200&key=AIzaSyANpHwd0ZvP_2qrvqEEp-5l6NS3LkwxSbY ')
-    .then(function(response) {
-      return response.json();
-    })
-    .then(function(guadalajara) {
-       guadalajaraOffset = guadalajara.rawOffset;
-    });
-const secondHand = document.querySelector('.second-hand');
-const minsHand = document.querySelector('.min-hand');
-const hourHand = document.querySelector('.hour-hand');
-function setDate() {
-  const now = new Date();
-  const seconds = now.getSeconds();
-  const secondsDegrees = ((seconds / 60) * 360) + 90;
-  secondHand.style.transform = `rotate(${secondsDegrees}deg)`;
-  const mins = now.getMinutes();
-  const minsDegrees = ((mins / 60) * 360) + ((seconds/60)*6) + 90;
-  minsHand.style.transform = `rotate(${minsDegrees}deg)`;
-  const hour = now.getHours();
-  const offsetHours = (offset / 3600);
-  const guadalajaraOffsetHours = (guadalajaraOffset / 3600)
-  const hourDegrees = (((hour + offsetHours + guadalajaraOffsetHours) / 12) * 360) + ((mins/60)*30) + 90;
-  hourHand.style.transform = `rotate(${hourDegrees}deg)`;
-}
-setInterval(setDate, 1000);
-setDate();
-//  LONDON Clock Ends---------------------------------------------------------------------------------------------------------------------------------------------- -->
-// TOKIO Clock Starts---------------------------------------------------------------------------------------------------------------------------------------------- -->
-let offsetinputCity = '';
-let latInputCity = 0;
-let lonInputCity = 0;
-let inputValue = '';
-const inputCity = document.querySelector("#form");
-
-function getValue(e) {
-  e.preventDefault();
-   inputValue = (this.querySelector('[name=inputCity]')).value
-   fetch(` https://maps.googleapis.com/maps/api/geocode/json?address=${inputValue}&key=AIzaSyAhbhZNE6A-Zcg49SMCyO7r_lH4MCDylRc `)
-     .then(function(response) {
-       return response.json();
-     })
-     .then(function(inputCity) {
-        latInputCity = inputCity.results[0].geometry.location.lat;
-        lonInputCity = inputCity.results[0].geometry.location.lng;
-        })
-     .then(function(){
-     fetch(`https://maps.googleapis.com/maps/api/timezone/json?location=${latInputCity},${lonInputCity}&timestamp=1331161200&key=AIzaSyANpHwd0ZvP_2qrvqEEp-5l6NS3LkwxSbY `)
-       .then(function(response) {
-         return response.json();
-       })
-       .then(function(inputCity) {
-           offsetinputCity = inputCity.rawOffset
-       })
-       .then(function(){
-       fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${latInputCity}&lon=${lonInputCity}&units=metric&APPID=261e313010ab3d43b1344ab9eba64cfa`)
-         .then(function(response) {
-           return response.json();
-         })
-         .then(function(data) {
-           wheatherTokyo = data.main.temp ;
-           document.querySelector(".tempTokyo").innerHTML = `${Math.round(wheatherTokyo)}`;
-           let wheatherTokyoF = (wheatherTokyo * 1.8)+32;
-           document.querySelector(".tempFTokyo").innerHTML = `${Math.round(wheatherTokyoF)}`;
-           wheatherIconTokyo = data.weather[0].icon;
-           document.querySelector(".icon-Tokyo").innerHTML = `<img class="icon-Img-Tokyo" src="../content/${wheatherIconTokyo}.png" width="70px" height="70px">`;
-         });
-       });
-     });
-}
-
-  inputCity.addEventListener("submit", getValue);
-const secondHandTokio = document.querySelector('.second-handTokio');
-const minsHandTokio = document.querySelector('.min-handTokio');
-const hourHandTokio = document.querySelector('.hour-handTokio');
-function setDateTokio() {
-  const nowTokio = new Date();
-  const secondsTokio = nowTokio.getSeconds();
-  const secondsDegreesTokio = ((secondsTokio / 60) * 360) + 90;
-  secondHandTokio.style.transform = `rotate(${secondsDegreesTokio}deg)`;
-  const minsTokio = nowTokio.getMinutes();
-  const minsDegreesTokio = ((minsTokio / 60) * 360) + ((secondsTokio / 60)*6) + 90;
-  minsHandTokio.style.transform = `rotate(${minsDegreesTokio}deg)`;
-  const hourTokio = nowTokio.getHours();
-  const offsetHoursTokio = (offsetinputCity / 3600);
-  const guadalajaraOffsetHours = (guadalajaraOffset / 3600);
-  const hourDegreesTokio = (((hourTokio + offsetHoursTokio + guadalajaraOffsetHours) / 12) * 360) + ((minsTokio/60)*30) + 90;
-  hourHandTokio.style.transform = `rotate(${hourDegreesTokio}deg)`;
-}
-setInterval(setDateTokio, 1000);
-setDateTokio();
-// Starts Tokyo Wheather ----------------------------------------------------------------------------------------------------------------------------------------
-let wheatherTokyo = '';
-function getWheatherTokyo() {
-fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${latInputCity}&lon=${lonInputCity}&units=metric&APPID=261e313010ab3d43b1344ab9eba64cfa`)
-  .then(function(response) {
-    return response.json();
-  })
-  .then(function(data) {
-    wheatherTokyo = data.main.temp ;
-    document.querySelector(".tempTokyo").innerHTML = `${Math.round(wheatherTokyo)}`;
-    let wheatherTokyoF = (wheatherTokyo * 1.8)+32;
-    document.querySelector(".tempFTokyo").innerHTML = `${Math.round(wheatherTokyoF)}`;
-    wheatherIconTokyo = data.weather[0].icon;
-    document.querySelector(".icon-Tokyo").innerHTML = `<img class="icon-Img-Tokyo" src="../content/${wheatherIconTokyo}.png" width="70px" height="70px">`;
-  });
-}
-  getWheatherTokyo();
-  setInterval(getWheatherTokyo, 600000);
-// TOKIO Clock Ends---------------------------------------------------------------------------------------------------------------------------------------------- -->
-// SYDNEY Clock Starts---------------------------------------------------------------------------------------------------------------------------------------------- -->
-let citiescord = {
-  Mexico: {
-    lon: -99.127663,
-    lat: 19.428471,
-    id: 3530597,
-    country: "MX",
-  },
- Guadalajara: {
-    lon: -103.333328,
-    lat: 20.66667,
-    id: 4005539,
-    country: "MX",
-  },
-Sydney: {
-    lon: 151.207321,
-    lat: -33.867851,
-    id: 2147714,
-    country: "AU",
-  },
-Bangkok: {
-    lon: 100.51667,
-    lat: 13.75,
-    id: 1609350,
-    country: "TH",
-  },
-};
-
-let offsetSydney = '';
-function changeTime() {
-const citiesDropdown = document.querySelector('#city-selectors');
-let selectedCity = citiesDropdown.value;
-let latSelectedClock = citiescord[selectedCity].lat;
-let lonSelectedClock = citiescord[selectedCity].lon;
-fetch(`https://maps.googleapis.com/maps/api/timezone/json?location=${latSelectedClock},${lonSelectedClock}&timestamp=1331161200&key=AIzaSyANpHwd0ZvP_2qrvqEEp-5l6NS3LkwxSbY `)
-.then(function(response) {
-  return response.json();
-})
-.then(function(sydney) {
-  offsetSydney = sydney.rawOffset;
-  console.log(offsetSydney);
-});
-};
-const secondHandSydney = document.querySelector('.second-handSydney');
-const minsHandSydney = document.querySelector('.min-handSydney');
-const hourHandSydney = document.querySelector('.hour-handSydney');
-function setDateSydney() {
-  const nowSydney = new Date();
-  const secondsSydney = nowSydney.getSeconds();
-  const secondsDegreesSydney = ((secondsSydney / 60) * 360) + 90;
-  secondHandSydney.style.transform = `rotate(${secondsDegreesSydney}deg)`;
-  const minsSydney = nowSydney.getMinutes();
-  const minsDegreesSydney = ((minsSydney / 60) * 360) + ((secondsSydney/60)*6) + 90;
-  minsHandSydney.style.transform = `rotate(${minsDegreesSydney}deg)`;
-  const hourSydney = nowSydney.getHours();
-  const offsetHoursSydney = (offsetSydney / 3600);
-  const guadalajaraOffsetHours = (guadalajaraOffset / 3600);
-  const hourDegreesSydney = (((hourSydney + offsetHoursSydney + guadalajaraOffsetHours) / 12) * 360) + ((minsSydney/60)*30) + 90;
-  console.log("Sydney",hourDegreesSydney);
-  hourHandSydney.style.transform = `rotate(${hourDegreesSydney}deg)`;
-}
-changeTime()
-setInterval(setDateSydney, 1000);
-setDateSydney();
-const changTimeClick = document.querySelectorAll('option');
-changTimeClick.forEach(option => option.addEventListener('click', changeTime));
-// Sydney Clock ENDS---------------------------------------------------------------------------------------------------------------------------------------------- -->
-let imageOffsetTop = 0;
-let imageOffsetLeft =0;
-let imageLon = 0;
-let imageLat = 0;
-let imageTime = 0;
-let positionY = 0;
-let positionX = 0;
-let worldPlace = '';
-countryShortName = '';
-let image = document.querySelector(".canvas-body");
-function scroll() {
-  imageOffsetTop = image.offsetTop;
-  imageOffsetLeft = image.offsetLeft;
-  console.log(imageOffsetTop);
-}
-scroll();
-window.addEventListener("scroll", scroll);
-window.addEventListener("scroll", scroll);
-function imageClick(e) {
-  positionY = e.pageY - imageOffsetTop ;
-  positionX = e.pageX - imageOffsetLeft ;
-  imageLat = (50 - positionY/5) * 1.8;
-  imageLon = (positionX/10 - 50) * 3.6;
-  console.log(imageLat , imageLon);
-  fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${imageLat}&lon=${imageLon}&units=metric&APPID=261e313010ab3d43b1344ab9eba64cfa`)
-    .then(function(response) {
-      return response.json();
-    })
-    .then(function(data) {
-      wheatherAllWorld = data.main.temp ;
-      document.querySelector(".temp-AllWorld").innerHTML = `${Math.round(wheatherAllWorld)}`;
-      let weatherAllWorldF = (wheatherAllWorld * 1.8)+32;
-      document.querySelector(".tempF-AllWorld").innerHTML = `${Math.round(weatherAllWorldF)}`;
-      wheatherIconWorld = data.weather[0].icon;
-      document.querySelector(".icon-AllWorld").innerHTML = `<img class="icon-Img-Tokyo" src="../content/${wheatherIconWorld}.png" width="70px" height="70px">`;
-    })
-      .then(function() {
-    fetch(` https://maps.googleapis.com/maps/api/geocode/json?latlng=${imageLat},${imageLon}&key=AIzaSyAhbhZNE6A-Zcg49SMCyO7r_lH4MCDylRc `)
-      .then(function(response) {
-        return response.json();
-      })
-      .then(function(cityName) {
-         worldPlace = cityName.results[0].address_components[1].short_name;
-         document.querySelector(".World-city").innerHTML = `${worldPlace}`;
-         countryShortName = cityName.results[0].address_components[3].short_name;
-         document.querySelector(".World-countrey").innerHTML = `${countryShortName}`;
-          console.log("cityName",cityName);
-         });
-       });
-}
-
-
-
-image.addEventListener("click", imageClick);
-
-function displayLonLat(e) {
-  console.log(e);
-}
-
-image.addEventListener("mousemove", displayLonLat)
-
-let offsetWorld = '';
-
-function getTimeWorld(){
-fetch(` https://maps.googleapis.com/maps/api/timezone/json?location=${imageLat},${imageLon}&timestamp=1331161200&key=AIzaSyANpHwd0ZvP_2qrvqEEp-5l6NS3LkwxSbY `)
-  .then(function(response) {
-    return response.json();
-  })
-  .then(function(world) {
-     offsetWorld = world.rawOffset;
-  });
-}
-const secondHandWorld = document.querySelector('.second-handWorld');
-const minsHandWorld = document.querySelector('.min-handWorld');
-const hourHandWorld = document.querySelector('.hour-handWorld');
-function setDateWorld() {
-  const nowWorld = new Date();
-  const secondsWorld = nowWorld.getSeconds();
-  const secondsDegreesWorld = ((secondsWorld / 60) * 360) + 90;
-  secondHandWorld.style.transform = `rotate(${secondsDegreesWorld}deg)`;
-  const minsWorld = nowWorld.getMinutes();
-  const minsDegreesWorld = ((minsWorld / 60) * 360) + ((secondsWorld / 60)*6) + 90;
-  minsHandTokio.style.transform = `rotate(${minsDegreesWorld}deg)`;
-  const hourWorld = nowWorld.getHours();
-  const offsetHoursWorld = (offsetWorld / 3600);
-  const guadalajaraOffsetHours = (guadalajaraOffset / 3600);
-  const hourDegreesWorld = (((hourWorld + offsetHoursWorld + guadalajaraOffsetHours) / 12) * 360) + ((minsWorld/60)*30) + 90;
-  hourHandWorld.style.transform = `rotate(${hourDegreesWorld}deg)`;
-}
-setInterval(setDateWorld, 1000);
-setDateWorld();
-image.addEventListener("click", getTimeWorld);
-// London wheather Starts---------------------------------------------------------------------------------------------------------------------------------------------- -->
-let wheather = '';
-let wheatherfahrenheit = '';
-let lat = 33;
-let lon = 151;
-let latTokyo = 35.6;
-let lonTokyo = 135.7;
-function getWheatherLondon() {
-fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&APPID=261e313010ab3d43b1344ab9eba64cfa`)
-  .then(function(response) {
-    return response.json();
-  })
-  .then(function(data) {
-    wheatherLondon = data.main.temp ;
-    document.querySelector(".tempLondon").innerHTML = `${Math.round(wheatherLondon)}`;
-    let wheatherLondonF = (wheatherLondon * 1.8)+32;
-    document.querySelector(".tempFLondon").innerHTML = `${Math.round(wheatherLondonF)}`
-    wheatherIconLondon = data.weather[0].icon;
-    console.log("wheatherIconLondon",wheatherIconLondon);
-    document.querySelector(".icon-London").innerHTML = `<img class="icon-Img-London" src="../content/${wheatherIconLondon}.png" width="70px" height="70px">`;
-  });
-}
-  getWheatherLondon();
-  setInterval(getWheatherLondon, 600000);
-
-// Starts Sydney Wheather ----------------------------------------------------------------------------------------------------------------------------------------
-wheatherSydney = '';
-wheatherSydneyF = '';
-
-function getWheatherSelected() {
-  const citiesDropdown = document.querySelector('#city-selectors');
-  let selectedCity = citiesDropdown.value;
-  let latSelected = citiescord[selectedCity].lat;
-  let lonSelected = citiescord[selectedCity].lon;
-  fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${latSelected}&lon=${lonSelected}&units=metric&APPID=261e313010ab3d43b1344ab9eba64cfa`)
-  .then(function(response) {
-    return response.json();
-  })
-  .then(function(data) {
-    wheatherSydney = data.main.temp ;
-    document.querySelector(".tempSelected").innerHTML = `${Math.round(wheatherSydney)}`;
-    let wheatherSydneyF = (wheatherSydney * 1.8)+32;
-    document.querySelector(".tempFSelected").innerHTML = `${Math.round(wheatherSydneyF)}`;
-    wheatherIconSelected = data.weather[0].icon;
-    document.querySelector(".icon-Selcted").innerHTML = `<img class="icon-Img-Selected" src="../content/${wheatherIconSelected}.png" width="70px" height="70px">`;
-  });
-}
-  getWheatherSelected();
-  setInterval(getWheatherSelected, 600000);
-const select = document.querySelectorAll('option');
-select.forEach(option => option.addEventListener('click', getWheatherSelected));
-
-
-
-
-
-
-
-  // .then(function(){
-  // fetch(`https://maps.googleapis.com/maps/api/timezone/json?location=${latInputCity},${lonInputCity}&timestamp=1331161200&key=AIzaSyANpHwd0ZvP_2qrvqEEp-5l6NS3LkwxSbY `)
-  //   .then(function(response) {
-  //     return response.json();
-  //   })
-  //   .then(function(inputCity) {
-  //       offsetinputCity = inputCity.rawOffset
-  //   })
-  //   .then(function(){
-  //   fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${latInputCity}&lon=${lonInputCity}&units=metric&APPID=261e313010ab3d43b1344ab9eba64cfa`)
-  //     .then(function(response) {
-  //       return response.json();
-  //     })
-  //     .then(function(data) {
-  //       wheatherTokyo = data.main.temp ;
-  //       document.querySelector(".tempTokyo").innerHTML = `${Math.round(wheatherTokyo)}`;
-  //       let wheatherTokyoF = (wheatherTokyo * 1.8)+32;
-  //       document.querySelector(".tempFTokyo").innerHTML = `${Math.round(wheatherTokyoF)}`;
-  //       wheatherIconTokyo = data.weather[0].icon;
-  //       document.querySelector(".icon-Tokyo").innerHTML = `<img class="icon-Img-Tokyo" src="../content/${wheatherIconTokyo}.png" width="70px" height="70px">`;
-  //     });
-  //   });
-  // });
-
-
-
-
-
-</script>
-</body>
-</html>
+      <div>
+      </div>
+      <style>
+      </style>
+      <script src="clockone.js"></script>
+      <script src="clocktwo.js"></script>
+      <script src="clocktree.js"></script>
+      <script src="clockfour.js"></script>
+      <script src="clockfive.js"></script>
+      <script>
+      </script>
+    </body>
+    </html>

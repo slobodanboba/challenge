@@ -21,7 +21,6 @@ html {
   color: rgba(255,255,255,0.9);
   z-index: auto;
 }
-
 .World-names {
   max-width: 200px;
   width: 200px;
@@ -33,14 +32,16 @@ html {
   left: 10%;
 }
 .World-city {
-  font-size: 2em;
-  font-weight: 200;
+  font-size: 25px;
+  font-weight: 500;
   text-align: center;
+  text-transform: capitalize;
 }
 .World-countrey {
-  font-size:2em;
-  font-weight: 400;
+  font-size:25px;
+  font-weight: 600;
   padding-left: 4px;
+  text-transform: capitalize;
 }
 select {
   bottom: 7px;
@@ -75,7 +76,6 @@ span {
   color: rgba(255,255,255,0.85);
   text-shadow: 1px 1px rgba(255,255,255,0.2);
 }
-
 input {
   position: relative;
   left: -27px;
@@ -91,7 +91,6 @@ input {
   border-radius: 5px;
   font-family:'helvetica neue';
 }
-
 .input-value {
   position: absolute;
   top: 60%;
@@ -104,16 +103,13 @@ input {
   font-weight: 400;
 }
 .results-list {
-display:grid;
-
+  display:grid;
 }
-
- .icons {
-   display: inline;
-   position: relative;
-   right: 30%;
- }
-
+.icons {
+  display: inline;
+  position: relative;
+  right: 30%;
+}
 .clock {
   width: 25rem;
   height: 25rem;
@@ -238,10 +234,9 @@ display:grid;
   top:0%;
   left:46%;
 }
-
 .temp-london {
-    position: relative;
-    top: 50px;
+  position: relative;
+  top: 50px;
 }
 .temp-tokyo {
   position: relative;
@@ -255,7 +250,6 @@ display:grid;
   position: relative;
   left: 10%;
 }
-
 .tempAllWorld {
   position: relative;
   top: 50px;
