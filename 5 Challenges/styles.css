@@ -22,6 +22,26 @@ html {
   z-index: auto;
 }
 
+.World-names {
+  max-width: 200px;
+  width: 200px;
+  height: 60px;
+  top:70%;
+  line-height: 20px;
+  overflow-x: auto;
+  position: absolute;
+  left: 10%;
+}
+.World-city {
+  font-size: 2em;
+  font-weight: 200;
+  text-align: center;
+}
+.World-countrey {
+  font-size:2em;
+  font-weight: 400;
+  padding-left: 4px;
+}
 select {
   bottom: 7px;
   right: 22%;
@@ -54,19 +74,31 @@ span {
   font-weight: 600;
   color: rgba(255,255,255,0.85);
   text-shadow: 1px 1px rgba(255,255,255,0.2);
-
 }
 
 input {
   position: relative;
-  top: 60%;
-  left: -22%;
-  background: rgba(255, 255, 255, 0.5);
+  left: -27px;
+  background: rgba(255, 255, 255, 0.2);
+  text-transform: capitalize;
+  color: rgba(255,255,255,0.85);
+  text-shadow: 1px 1px rgba(255,255,255,0.1);
+  height: 25px;
+  width: 150px;
+  font-size: 1em;
+  text-align: center;
   font-weight: 800;
+  border-radius: 5px;
+  font-family:'helvetica neue';
+}
+
+.input-value {
+  position: absolute;
+  top: 60%;
+  left: -30%;
   text-transform: capitalize;
   max-width: 150px;
 }
-
 .input {
   font-size: 50px;
   font-weight: 400;

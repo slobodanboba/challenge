@@ -32,10 +32,10 @@
         <div class="hours hour6"></div>
         <div class="hours hour9"></div>
         <div class="hours hour12"></div>
-        <div class="city Tokyocity">
+        <div class="city InputCity">
           <form style="input-city" id="form">
              <input style="input input-value" type="text" name="inputCity" value="City"><br>
-             <input style="input input-submit" type="submit" value="Submit">
+             <!-- <input style="input input-submit" type="submit" value="Submit"> -->
            </form>
         </div>
       </div>
@@ -75,7 +75,7 @@
         <div class="hours hour6"></div>
         <div class="hours hour9"></div>
         <div class="hours hour12"></div>
-        <div class="city World-city">World</div>
+        <div class="World-names"><span class="World-city">World</span><span class="World-countrey"></span></div>
       </div>
       <div class="temp-info tempAllWorld"><span class="text-london"><span class="temp temp-AllWorld"></span><span>°C</span>|<span class="temp tempF-AllWorld"></span><span>°F</span></div>
       <div class="icons icon-AllWorld"></div>
@@ -169,7 +169,6 @@ function getValue(e) {
        })
        .then(function(inputCity) {
            offsetinputCity = inputCity.rawOffset
-          console.log(inputCity);
        })
        .then(function(){
        fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${latInputCity}&lon=${lonInputCity}&units=metric&APPID=261e313010ab3d43b1344ab9eba64cfa`)
@@ -301,7 +300,9 @@ let imageLat = 0;
 let imageTime = 0;
 let positionY = 0;
 let positionX = 0;
-let image = document.querySelector(".canvas-body")
+let worldPlace = '';
+countryShortName = '';
+let image = document.querySelector(".canvas-body");
 function scroll() {
   imageOffsetTop = image.offsetTop;
   imageOffsetLeft = image.offsetLeft;
@@ -325,10 +326,26 @@ function imageClick(e) {
       document.querySelector(".temp-AllWorld").innerHTML = `${Math.round(wheatherAllWorld)}`;
       let weatherAllWorldF = (wheatherAllWorld * 1.8)+32;
       document.querySelector(".tempF-AllWorld").innerHTML = `${Math.round(weatherAllWorldF)}`;
-      wheatherIconTokyo = data.weather[0].icon;
-      document.querySelector(".icon-AllWorld").innerHTML = `<img class="icon-Img-Tokyo" src="../content/${wheatherIconTokyo}.png" width="70px" height="70px">`;
-    });
+      wheatherIconWorld = data.weather[0].icon;
+      document.querySelector(".icon-AllWorld").innerHTML = `<img class="icon-Img-Tokyo" src="../content/${wheatherIconWorld}.png" width="70px" height="70px">`;
+    })
+      .then(function() {
+    fetch(` https://maps.googleapis.com/maps/api/geocode/json?latlng=${imageLat},${imageLon}&key=AIzaSyAhbhZNE6A-Zcg49SMCyO7r_lH4MCDylRc `)
+      .then(function(response) {
+        return response.json();
+      })
+      .then(function(cityName) {
+         worldPlace = cityName.results[0].address_components[1].short_name;
+         document.querySelector(".World-city").innerHTML = `${worldPlace}`;
+         countryShortName = cityName.results[0].address_components[3].short_name;
+         document.querySelector(".World-countrey").innerHTML = `${countryShortName}`;
+          console.log("cityName",cityName);
+         });
+       });
 }
+
+
+
 image.addEventListener("click", imageClick);
 
 function displayLonLat(e) {
@@ -419,6 +436,41 @@ function getWheatherSelected() {
   setInterval(getWheatherSelected, 600000);
 const select = document.querySelectorAll('option');
 select.forEach(option => option.addEventListener('click', getWheatherSelected));
+
+
+
+
+
+
+
+  // .then(function(){
+  // fetch(`https://maps.googleapis.com/maps/api/timezone/json?location=${latInputCity},${lonInputCity}&timestamp=1331161200&key=AIzaSyANpHwd0ZvP_2qrvqEEp-5l6NS3LkwxSbY `)
+  //   .then(function(response) {
+  //     return response.json();
+  //   })
+  //   .then(function(inputCity) {
+  //       offsetinputCity = inputCity.rawOffset
+  //   })
+  //   .then(function(){
+  //   fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${latInputCity}&lon=${lonInputCity}&units=metric&APPID=261e313010ab3d43b1344ab9eba64cfa`)
+  //     .then(function(response) {
+  //       return response.json();
+  //     })
+  //     .then(function(data) {
+  //       wheatherTokyo = data.main.temp ;
+  //       document.querySelector(".tempTokyo").innerHTML = `${Math.round(wheatherTokyo)}`;
+  //       let wheatherTokyoF = (wheatherTokyo * 1.8)+32;
+  //       document.querySelector(".tempFTokyo").innerHTML = `${Math.round(wheatherTokyoF)}`;
+  //       wheatherIconTokyo = data.weather[0].icon;
+  //       document.querySelector(".icon-Tokyo").innerHTML = `<img class="icon-Img-Tokyo" src="../content/${wheatherIconTokyo}.png" width="70px" height="70px">`;
+  //     });
+  //   });
+  // });
+
+
+
+
+
 </script>
 </body>
 </html>
