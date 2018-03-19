@@ -65,12 +65,39 @@ function imageClick(e) {
     fetch(` https://maps.googleapis.com/maps/api/geocode/json?latlng=${imageLat},${imageLon}&key=AIzaSyAhbhZNE6A-Zcg49SMCyO7r_lH4MCDylRc `)
     .then(response => response.json())
     .then(function(cityName , i) {
-      if (cityName.results[0] == undefined ||cityName.results[0].address_components[1] == undefined ||cityName.results[0].address_components[3] == undefined)  {
-        worldPlace = cityName.results[0].address_components[1].short_name ;
+      if (cityName.results[0] == undefined || cityName.results[0].address_components[1] == undefined) {
+        worldPlace = 'MISSING PLACE NAME';
         document.querySelector(".World-city").innerHTML = `${worldPlace}`;
         countryShortName = '';
         document.querySelector(".World-countrey").innerHTML = `${countryShortName}`;
-      } else {
+        const placeNameLi = { worldPlace,  countryShortName , wheatherAllWorld , weatherAllWorldF };
+        savedcities.push(placeNameLi);
+        console.log('savedcities',savedcities);
+        const savedList = document.querySelector('.list');
+        savedList.innerHTML = savedcities.map(city => {
+            return `
+              <li>
+              <input type="checkbox" data-index=${i} id="item${i}"> <span> ${city.worldPlace} ${city.countryShortName} ${Math.round(city.wheatherAllWorld)}C| ${Math.round(city.weatherAllWorldF)}F</span>
+              </li>
+            `;
+          }).join('');
+      } else if (cityName.results[0].address_components[3] == undefined)  {
+          worldPlace = cityName.results[0].address_components[1].short_name ;
+          document.querySelector(".World-city").innerHTML = `${worldPlace}`;
+          countryShortName = 'NaN';
+          document.querySelector(".World-countrey").innerHTML = `${countryShortName}`;
+          const placeNameLi = { worldPlace,  countryShortName , wheatherAllWorld , weatherAllWorldF };
+          savedcities.push(placeNameLi);
+          console.log('savedcities',savedcities);
+          const savedList = document.querySelector('.list');
+          savedList.innerHTML = savedcities.map(city => {
+              return `
+                <li>
+                <input type="checkbox" data-index=${i} id="item${i}"> <span> ${city.worldPlace} ${city.countryShortName} ${Math.round(city.wheatherAllWorld)}C| ${Math.round(city.weatherAllWorldF)}F</span>
+                </li>
+              `;
+            }).join('');
+      } else  {
         worldPlace = cityName.results[0].address_components[1].short_name;
         document.querySelector(".World-city").innerHTML = `${worldPlace}` ;
         countryShortName = cityName.results[0].address_components[3].short_name;
