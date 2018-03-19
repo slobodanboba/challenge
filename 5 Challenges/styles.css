@@ -68,8 +68,6 @@ html {
   text-transform: capitalize;
 }
 .world-map {
-  position: relative;
-  bottom: 40px;
   border:5px solid rgba(255,255,255,0.9);
   border-radius: 15px;
 }
@@ -313,7 +311,8 @@ input {
 
 .list {
   overflow-y: auto;
-  max-height: 300px;
+  overflow-x: hidden;
+  height: 370px;
   position: relative;
   left: -15px;
 }
@@ -354,17 +353,17 @@ ul li input {
 /*Saved List----------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
 .wrapper {
-  padding: 50px;
+  padding: 30px;
   max-width: 400px;
   min-width: 300px;
-  height: 400px;
+  height: 450px;
   background: rgba(255,255,255,0.2);
   border:5px solid rgba(255,255,255,0.9);
   border-radius: 15px;
   margin-left: auto;
   margin-right: auto;
   position: relative;
-  bottom: 40px;
+  bottom: 10px;
 }
 
 h2 {

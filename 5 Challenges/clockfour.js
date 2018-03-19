@@ -26,8 +26,8 @@ scroll();
 window.addEventListener("scroll", scroll);
 
 function displayLonLat(e) {
-  positionY = e.pageY - imageOffsetTop ;
-  positionX = e.pageX - imageOffsetLeft ;
+  positionY = e.pageY - imageOffsetTop - 5;
+  positionX = e.pageX - imageOffsetLeft - 5;
   imageLat = (50 - positionY/5) * 1.8;
   imageLon = (positionX/10 - 50) * 3.6;
   document.documentElement.style.setProperty("--pageX", e.pageX + suffix);
