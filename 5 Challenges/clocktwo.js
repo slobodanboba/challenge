@@ -9,26 +9,20 @@ function getValue(e) {
   e.preventDefault();
   inputValue = (this.querySelector('[name=inputCity]')).value
   fetch(` https://maps.googleapis.com/maps/api/geocode/json?address=${inputValue}&key=AIzaSyAhbhZNE6A-Zcg49SMCyO7r_lH4MCDylRc `)
-  .then(function(response) {
-    return response.json();
-  })
+.then(response => response.json())
   .then(function(inputCity) {
     latInputCity = inputCity.results[0].geometry.location.lat;
     lonInputCity = inputCity.results[0].geometry.location.lng;
   })
   .then(function(){
     fetch(`https://maps.googleapis.com/maps/api/timezone/json?location=${latInputCity},${lonInputCity}&timestamp=1331161200&key=AIzaSyANpHwd0ZvP_2qrvqEEp-5l6NS3LkwxSbY `)
-    .then(function(response) {
-      return response.json();
-    })
+    .then(response => response.json())
     .then(function(inputCity) {
       offsetinputCity = inputCity.rawOffset
     })
     .then(function(){
       fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${latInputCity}&lon=${lonInputCity}&units=metric&APPID=261e313010ab3d43b1344ab9eba64cfa`)
-      .then(function(response) {
-        return response.json();
-      })
+      .then(response => response.json())
       .then(function(data) {
         wheatherTokyo = data.main.temp ;
         document.querySelector(".tempTokyo").innerHTML = `${Math.round(wheatherTokyo)}`;
@@ -67,9 +61,7 @@ setDateTokio();
 let wheatherTokyo = '';
 function getWheatherTokyo() {
   fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${latInputCity}&lon=${lonInputCity}&units=metric&APPID=261e313010ab3d43b1344ab9eba64cfa`)
-  .then(function(response) {
-    return response.json();
-  })
+  .then(response => response.json())
   .then(function(data) {
     wheatherTokyo = data.main.temp ;
     document.querySelector(".tempTokyo").innerHTML = `${Math.round(wheatherTokyo)}`;

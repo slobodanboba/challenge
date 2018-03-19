@@ -2,6 +2,18 @@
   --pageX: 0;
   --pageY: 0;
 }
+::-webkit-scrollbar {
+   width: 7px;
+}
+::-webkit-scrollbar-track {
+   background: rgba(255,255,255,0.1);
+}
+::-webkit-scrollbar-thumb {
+   background: rgba(255,255,255,0.3);
+}
+::-webkit-scrollbar-thumb:hover {
+   background: rgba(255,255,255,0.5);
+}
 
 
 html {
@@ -9,6 +21,12 @@ html {
   text-align: center;
   font-size: 10px;
   background:#0F334A ;
+  box-sizing: border-box;
+  background-size:cover;
+  min-height:100vh;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 .body-container {
   background-repeat:repeat-x;
@@ -48,6 +66,19 @@ html {
   font-weight: 600;
   padding-left: 4px;
   text-transform: capitalize;
+}
+.world-map {
+  position: relative;
+  bottom: 40px;
+  border:5px solid rgba(255,255,255,0.9);
+  border-radius: 15px;
+}
+h2 {
+  font-size: 25px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.85);
+  text-shadow: 1px 1px rgba(255,255,255,0.2);
+  font-family:'helvetica neue';
 }
 select {
   bottom: 7px;
@@ -278,4 +309,66 @@ input {
   text-align: left;
   padding-top: 4px;
   margin-left: 0px;
+}
+
+.list {
+  overflow-y: auto;
+  max-height: 300px;
+  position: relative;
+  left: -15px;
+}
+
+ul li span {
+  color: rgba(255,255,255,0.9);
+  font-size: 1.7em;
+  font-weight: 400;
+  line-height: 30px;
+
+
+}
+ul li {
+    border-bottom: 2px solid rgba(0,0,0,0.2);
+    min-width: 250px;
+    text-align: justify;
+    list-style: none;
+}
+ul li input {
+  position: relative;
+  left: 0px;
+  background: rgba(255, 255, 255, 0.2);
+  text-transform: inherit;
+  color: rgba(255,255,255,0.85);
+  text-shadow: 1px 1px rgba(255,255,255,0.0);
+  height: auto;
+  width: 10px;
+  font-size: 1em;
+  text-align: left;
+  font-weight:200;
+}
+
+.delete {
+  text-align: right;
+  color: rgba(0,0,0,0.3);
+}
+
+/*Saved List----------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+.wrapper {
+  padding: 50px;
+  max-width: 400px;
+  min-width: 300px;
+  height: 400px;
+  background: rgba(255,255,255,0.2);
+  border:5px solid rgba(255,255,255,0.9);
+  border-radius: 15px;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  bottom: 40px;
+}
+
+h2 {
+  text-align: center;
+  margin: 0;
+  font-weight: 200;
 }

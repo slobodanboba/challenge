@@ -2,16 +2,12 @@
 let offset = '';
 let guadalajaraOffset = '';
 fetch(' https://maps.googleapis.com/maps/api/timezone/json?location=51.5073,-0.1277&timestamp=1331161200&key=AIzaSyANpHwd0ZvP_2qrvqEEp-5l6NS3LkwxSbY ')
-.then(function(response) {
-  return response.json();
-})
+.then(response => response.json())
 .then(function(myJson) {
   offset = myJson.rawOffset;
 });
 fetch(' https://maps.googleapis.com/maps/api/timezone/json?location=20.6596,-103.3496&timestamp=1331161200&key=AIzaSyANpHwd0ZvP_2qrvqEEp-5l6NS3LkwxSbY ')
-.then(function(response) {
-  return response.json();
-})
+.then(response => response.json())
 .then(function(guadalajara) {
   guadalajaraOffset = guadalajara.rawOffset;
 });
@@ -44,9 +40,7 @@ let latTokyo = 35.6;
 let lonTokyo = 135.7;
 function getWheatherLondon() {
   fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&APPID=261e313010ab3d43b1344ab9eba64cfa`)
-  .then(function(response) {
-    return response.json();
-  })
+.then(response => response.json())
   .then(function(data) {
     wheatherLondon = data.main.temp ;
     document.querySelector(".tempLondon").innerHTML = `${Math.round(wheatherLondon)}`;
