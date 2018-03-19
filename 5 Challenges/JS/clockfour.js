@@ -26,8 +26,8 @@ scroll();
 window.addEventListener("scroll", scroll);
 
 function displayLonLat(e) {
-  positionY = e.pageY - imageOffsetTop - 5;
-  positionX = e.pageX - imageOffsetLeft - 5;
+  positionY = e.pageY - imageOffsetTop;
+  positionX = e.pageX - imageOffsetLeft;
   imageLat = (50 - positionY/5) * 1.8;
   imageLon = (positionX/10 - 50) * 3.6;
   document.documentElement.style.setProperty("--pageX", e.pageX + suffix);
@@ -91,7 +91,6 @@ function imageClick(e) {
   });
 }
 image.addEventListener("click", imageClick);
-
 
 function getTimeWorld(){
   fetch(` https://maps.googleapis.com/maps/api/timezone/json?location=${imageLat},${imageLon}&timestamp=1331161200&key=AIzaSyANpHwd0ZvP_2qrvqEEp-5l6NS3LkwxSbY `)
