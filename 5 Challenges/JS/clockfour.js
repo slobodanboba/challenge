@@ -14,7 +14,7 @@ let wheatherAllWorld = 0;
 let weatherAllWorldF = 0;
 let offsetWorld = '';
 let wheatherIconWorld = '';
-
+let zoombool = false;
 
 let image = document.querySelector(".world-map");
 
@@ -27,6 +27,7 @@ scroll();
 window.addEventListener("scroll", scroll);
 
 function displayLonLat(e) {
+   if (!zoombool) {
   positionY = e.pageY - imageOffsetTop;
   positionX = e.pageX - imageOffsetLeft;
   imageLat = (50 - positionY/5) * 1.8;
@@ -35,6 +36,7 @@ function displayLonLat(e) {
   document.documentElement.style.setProperty(`--pageY`, e.pageY + suffix);
   document.querySelector('.spanLat').innerHTML = Math.round(imageLat);
   document.querySelector('.spanLon').innerHTML = Math.round(imageLon);
+ }
 }
 function displayOn() {
   document.querySelector('.movingDiv').style.display = "block";
@@ -153,19 +155,44 @@ image.addEventListener("click", getTimeWorld);
 
 let images = document.querySelectorAll('.img');
 let zoomedpic = document.querySelector('.zoomed');
-
-function zoom(e) {
+let maxlat = 0;
+let minlon = 0;
+let positionYZoom = 0;
+let positionXZoom = 0;
+let imageLatZoom = 0;
+let imageLonZoom = 0;
+function zoom (e) {
   if(e.ctrlKey) {
      zoomedpic.style.backgroundImage = `url(./splitted/img${e.target.id}.png)`;
      zoomedpic.style.display = "block";
-     console.log(e);
+     maxlat = e.target.dataset.maxlat;
+     minlon = e.target.dataset.minlon;
+     zoombool = true;
+     console.log(e.pageY);
 }};
+
+images.forEach(option => option.addEventListener('click', zoom));
+
+function displayZoomed(e) {
+     if(zoombool == true) {
+  positionYZoom = e.pageY - e.target.offsetTop ;
+  positionXZoom = e.pageX - e.target.offsetLeft ;
+  imageLatZoom = (maxlat) - ((positionYZoom/5) * 0.45) ;
+  imageLonZoom = ((positionXZoom/10) * 0.9 - (-minlon));
+  document.documentElement.style.setProperty("--pageX", e.pageX + suffix);
+  document.documentElement.style.setProperty(`--pageY`, e.pageY + suffix);
+  document.querySelector('.spanLat').innerHTML = Math.round(imageLatZoom);
+  document.querySelector('.spanLon').innerHTML = Math.round(imageLonZoom);
+ }
+}
+
+image.addEventListener('mousemove', displayZoomed);
 
 function zoomout(e) {
     if(e.ctrlKey) {
       zoomedpic.style.display = "none";
+      zoombool = false;
     }
 }
 
-images.forEach(option => option.addEventListener('click', zoom));
 zoomedpic.addEventListener("click", zoomout);
