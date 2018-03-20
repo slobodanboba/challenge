@@ -87,7 +87,7 @@ html {
     grid-column: 1 /1;
     width: 1000px;
     height:500px;
-    border-radius: 5px;
+    border-radius: 15px;
 }
 h2 {
   font-size: 25px;
