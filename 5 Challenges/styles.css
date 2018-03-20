@@ -88,6 +88,7 @@ html {
     width: 1000px;
     height:500px;
     border-radius: 5px;
+    background-size: 1000px 500px;
 }
 h2 {
   font-size: 25px;
