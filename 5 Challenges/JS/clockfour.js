@@ -1,3 +1,4 @@
+
 let imageOffsetTop = 0;
 let imageOffsetLeft =0;
 let imageLon = 0;
@@ -15,7 +16,7 @@ let offsetWorld = '';
 let wheatherIconWorld = '';
 
 
-let image = document.querySelector(".canvas-body");
+let image = document.querySelector(".world-map");
 
 function scroll() {
   imageOffsetTop = image.offsetTop;
@@ -46,6 +47,7 @@ image.addEventListener("mouseover", displayOn);
 image.addEventListener("mouseout", displayOff);
 
 function imageClick(e) {
+     if(!e.ctrlKey) {
   positionY = e.pageY - imageOffsetTop ;
   positionX = e.pageX - imageOffsetLeft ;
   imageLat = (50 - positionY/5) * 1.8;
@@ -116,7 +118,8 @@ function imageClick(e) {
       }
     });
   });
-
+ }
+}
 image.addEventListener("click", imageClick);
 
 function getTimeWorld(){
@@ -146,3 +149,23 @@ function setDateWorld() {
 setInterval(setDateWorld, 1000);
 setDateWorld();
 image.addEventListener("click", getTimeWorld);
+
+
+let images = document.querySelectorAll('.img');
+let zoomedpic = document.querySelector('.zoomed');
+
+function zoom(e) {
+  if(e.ctrlKey) {
+     zoomedpic.style.backgroundImage = `url(./splitted/img${e.target.id}.png)`;
+     zoomedpic.style.display = "block";
+     console.log(e);
+}};
+
+function zoomout(e) {
+    if(e.ctrlKey) {
+      zoomedpic.style.display = "none";
+    }
+}
+
+images.forEach(option => option.addEventListener('click', zoom));
+zoomedpic.addEventListener("click", zoomout);
