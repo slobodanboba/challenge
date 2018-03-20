@@ -185,7 +185,7 @@ function displayZoomed(e) {
  }
 }
 
-image.addEventListener('mousemove', displayZoomed);
+zoomedpic.addEventListener('mousemove', displayZoomed);
 
 function zoomout(e) {
     if(e.ctrlKey) {
@@ -209,7 +209,7 @@ function zoomedAddToList(e) {
     document.querySelector(".icon-AllWorld").innerHTML = `<img class="icon-Img-Tokyo" src="../content/${wheatherIconWorld}.png" width="70px" height="70px">`;
   })
   .then(function() {
-    fetch(` https://maps.googleapis.com/maps/api/geocode/json?latlng=${imageLat},${imageLon}&key=AIzaSyAhbhZNE6A-Zcg49SMCyO7r_lH4MCDylRc `)
+    fetch(` https://maps.googleapis.com/maps/api/geocode/json?latlng=${imageLatZoom},${imageLonZoom}&key=AIzaSyAhbhZNE6A-Zcg49SMCyO7r_lH4MCDylRc `)
     .then(response => response.json())
     .then(function(cityName , i) {
       if (cityName.results[0] == undefined || cityName.results[0].address_components[1] == undefined) {
@@ -266,4 +266,4 @@ function zoomedAddToList(e) {
  }
 }
 
-image.addEventListener("click", zoomedAddToList);
+zoomedpic.addEventListener("click", zoomedAddToList);
