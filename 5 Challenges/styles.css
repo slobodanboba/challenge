@@ -68,7 +68,26 @@ html {
   text-transform: capitalize;
 }
 .world-map {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
   border-radius: 15px;
+  background: url("../content/Earthmap.jpg");
+  background-size: 1000px 500px;
+  width: 1000px;
+  height:500px;
+}
+.img {
+  height: 125px;
+  width: 250px;
+}
+.zoomed {
+    display: none;
+    grid-row: 1 / -1;
+    grid-column: 1 /1;
+    width: 1000px;
+    height:500px;
+    border-radius: 5px;
 }
 h2 {
   font-size: 25px;

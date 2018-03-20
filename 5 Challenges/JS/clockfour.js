@@ -15,7 +15,7 @@ let offsetWorld = '';
 let wheatherIconWorld = '';
 
 
-let image = document.querySelector(".canvas-body");
+let image = document.querySelector(".world-map");
 
 function scroll() {
   imageOffsetTop = image.offsetTop;
@@ -146,3 +146,23 @@ function setDateWorld() {
 setInterval(setDateWorld, 1000);
 setDateWorld();
 image.addEventListener("click", getTimeWorld);
+
+
+let images = document.querySelectorAll('.img');
+let zoomedpic = document.querySelector('.zoomed');
+
+function zoom(e) {
+  if(e.ctrlKey) {
+     zoomedpic.style.backgroundImage = `url(./splitted/img${e.target.id}.png)`;
+     zoomedpic.style.display = "block";
+     console.log(e);
+}};
+
+function zoomout(e) {
+    if(e.ctrlKey) {
+      zoomedpic.style.display = "none";
+    }
+}
+
+images.forEach(option => option.addEventListener('click', zoom));
+zoomedpic.addEventListener("click", zoomout);
