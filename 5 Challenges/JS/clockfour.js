@@ -192,7 +192,7 @@ function displayZoomed(e) {
   document.documentElement.style.setProperty(`--pageY`, e.pageY + suffix);
   document.querySelector('.spanLat').innerHTML = Math.round(imageLatZoom);
   document.querySelector('.spanLon').innerHTML = Math.round(imageLonZoom);
-  console.log("maxlat", maxlat , "minLon",minlon, "zoomedOffsetTop",zoomedOffsetTop , "zoomedOffsetLeft " , zoomedOffsetLeft,  "e.pageY" , e.pageY  , "e.pageX ", e.pageX , "positionYZoom", positionYZoom , 'positionXZoom', positionXZoom );
+  console.log("imageOffsetTop", imageOffsetTop, "imageOffsetLeft", imageOffsetLeft, "maxlat", maxlat , "minLon",minlon, "zoomedOffsetTop",zoomedOffsetTop , "zoomedOffsetLeft " , zoomedOffsetLeft,  "e.pageY" , e.pageY  , "e.pageX ", e.pageX , "positionYZoom", positionYZoom , 'positionXZoom', positionXZoom );
  }
 }
 zoomedpic.addEventListener('mousemove', displayZoomed);
