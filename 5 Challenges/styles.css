@@ -75,6 +75,7 @@ html {
   background-size: 1000px 500px;
   width: 1000px;
   height:500px;
+  border-radius: 15px;
 }
 .img {
   height: 50px;
@@ -91,6 +92,7 @@ html {
     background-size: 1000px 500px;
     margin: 0px;
     padding: 0px;
+    border-radius: 15px;
 }
 h2 {
   font-size: 25px;
@@ -375,16 +377,15 @@ ul li input {
 
 .wrapper {
   padding: 30px;
-  max-width: 400px;
+  max-width: 350px;
   min-width: 300px;
-  height: 450px;
+  height: 430px;
   background: rgba(255,255,255,0.2);
   border:5px solid rgba(255,255,255,0.9);
   border-radius: 15px;
   margin-left: auto;
   margin-right: auto;
   position: relative;
-  bottom: 10px;
 }
 
 h2 {
