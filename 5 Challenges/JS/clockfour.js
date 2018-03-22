@@ -152,7 +152,6 @@ setInterval(setDateWorld, 1000);
 setDateWorld();
 image.addEventListener("click", getTimeWorld);
 
-
 let images = document.querySelectorAll('.img');
 let zoomedpic = document.querySelector('.zoomed');
 let maxlat = 0;
@@ -161,38 +160,32 @@ let positionYZoom = 0;
 let positionXZoom = 0;
 let imageLatZoom = 0;
 let imageLonZoom = 0;
-let zoomedOffsetTop = 0;
-let zoomedOffsetLeft = 0;
 let maxColumn = 0;
 let maxRow = 0;
+
 function zoom (e) {
   if(e.ctrlKey) {
      zoomedpic.style.backgroundImage = `url(./images/img${e.target.id}.jpg)`;
      zoomedpic.style.display = "grid";
      maxRow = Math.floor(e.target.id/10);
      maxlat = (90 - (maxRow  * 18));
-     console.log("maxlat" , maxlat);
      maxColumn = (e.target.id%10);
      minlon = maxColumn * 36 - 180;
      zoombool = true;
-     zoomedOffsetTop =  imageOffsetTop + (maxRow * 50);
-     zoomedOffsetLeft =  imageOffsetLeft + (maxColumn * 100);
      console.log(e.target);
 }};
-
 images.forEach(option => option.addEventListener('click', zoom));
 
 function displayZoomed(e) {
      if(zoombool == true) {
-  positionYZoom = e.pageY - zoomedOffsetTop;
-  positionXZoom = e.pageX - zoomedOffsetLeft;
+  positionYZoom = e.pageY - imageOffsetTop;
+  positionXZoom = e.pageX - imageOffsetLeft;
   imageLatZoom = (maxlat) - ((positionYZoom/5) * 0.18);
   imageLonZoom = ((positionXZoom/10) * 0.36 - (-minlon));
   document.documentElement.style.setProperty("--pageX", e.pageX + suffix);
   document.documentElement.style.setProperty(`--pageY`, e.pageY + suffix);
   document.querySelector('.spanLat').innerHTML = Math.round(imageLatZoom);
   document.querySelector('.spanLon').innerHTML = Math.round(imageLonZoom);
-  console.log("imageOffsetTop", imageOffsetTop, "imageOffsetLeft", imageOffsetLeft, "maxlat", maxlat , "minLon",minlon, "zoomedOffsetTop",zoomedOffsetTop , "zoomedOffsetLeft " , zoomedOffsetLeft,  "e.pageY" , e.pageY  , "e.pageX ", e.pageX , "positionYZoom", positionYZoom , 'positionXZoom', positionXZoom );
  }
 }
 zoomedpic.addEventListener('mousemove', displayZoomed);
