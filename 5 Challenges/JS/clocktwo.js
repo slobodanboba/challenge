@@ -21,7 +21,7 @@ function getValue(e) {
       offsetinputCity = inputCity.rawOffset
     })
     .then(function(){
-      fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${latInputCity}&lon=${lonInputCity}&units=metric&APPID=261e313010ab3d43b1344ab9eba64cfa`)
+      fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${latInputCity}&lon=${lonInputCity}&units=metric&APPID=261e313010ab3d43b1344ab9eba64cfa`)
       .then(response => response.json())
       .then(function(data) {
         wheatherTokyo = data.main.temp ;
@@ -60,7 +60,7 @@ setDateTokio();
 // Starts Tokyo Wheather ----------------------------------------------------------------------------------------------------------------------------------------
 let wheatherTokyo = '';
 function getWheatherTokyo() {
-  fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${latInputCity}&lon=${lonInputCity}&units=metric&APPID=261e313010ab3d43b1344ab9eba64cfa`)
+  fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${latInputCity}&lon=${lonInputCity}&units=metric&APPID=261e313010ab3d43b1344ab9eba64cfa`)
   .then(response => response.json())
   .then(function(data) {
     wheatherTokyo = data.main.temp ;
