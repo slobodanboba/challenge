@@ -72,24 +72,22 @@ html {
   grid-template-columns: repeat(10, 1fr);
   grid-template-rows: repeat(10, 1fr);
   background: url("../content/Earthmap.jpg");
-  background-size: 1000px 500px;
-  width: 1000px;
-  height:500px;
+  background-size: cover;
+  height:400px;
+  width: 800px;
   border-radius: 15px;
 }
 .img {
-  height: 50px;
-  width: 100px;
   margin: 0px;
   padding: 0px;
 }
 .zoomed {
     display: none;
     grid-row: 1 / -1;
-    grid-column: 1 /1;
-    width: 1000px;
-    height:500px;
-    background-size: 1000px 500px;
+    grid-column: 1 /-1;
+    background-size: cover;
+    height: auto;
+    width: auto;
     margin: 0px;
     padding: 0px;
     border-radius: 15px;
