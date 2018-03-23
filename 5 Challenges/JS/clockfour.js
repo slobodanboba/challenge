@@ -232,7 +232,7 @@ function zoomedAddToList(e) {
       } else if (cityName.results[0].address_components[3] == undefined)  {
           worldPlace = cityName.results[0].address_components[1].short_name ;
           document.querySelector(".World-city").innerHTML = `${worldPlace}`;
-          countryShortName = 'NaN';
+          countryShortName = '';
           document.querySelector(".World-countrey").innerHTML = `${countryShortName}`;
           const placeNameLi = { worldPlace,  countryShortName , wheatherAllWorld , weatherAllWorldF };
           savedcities.push(placeNameLi);
