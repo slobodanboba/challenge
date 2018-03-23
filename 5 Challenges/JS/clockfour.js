@@ -164,7 +164,7 @@ let maxColumn = 0;
 let maxRow = 0;
 
 function zoom (e) {
-  if(e.ctrlKey) {
+  if(e.ctrlKey || e.shiftKey) {
      zoomedpic.style.backgroundImage = `url(./images/img${e.target.id}.jpg)`;
      zoomedpic.style.display = "grid";
      maxRow = Math.floor(e.target.id/10);
@@ -192,7 +192,7 @@ function displayZoomed(e) {
 }
 zoomedpic.addEventListener('mousemove', displayZoomed);
 function zoomout(e) {
-    if(e.ctrlKey) {
+    if(e.ctrlKey || e.shiftKey) {
       zoomedpic.style.display = "none";
       zoombool = false;
     }
