@@ -32,8 +32,9 @@ html {
   background-repeat:repeat-x;
   background-size: cover;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-gap: 50px;
 }
 .city {
   position: absolute;
@@ -71,11 +72,13 @@ html {
   display: grid;
   grid-template-columns: repeat(10, 1fr);
   grid-template-rows: repeat(10, 1fr);
+  grid-row: 2/3;
+  grid-column: 2/4;
   background: url("../content/Earthmap.jpg");
   background-size: cover;
-  height:400px;
-  width: 800px;
   border-radius: 15px;
+  max-width: 100%;
+  max-height: 100%;
 }
 .img {
   margin: 0px;
@@ -86,12 +89,16 @@ html {
     grid-row: 1 / -1;
     grid-column: 1 /-1;
     background-size: cover;
-    height: auto;
-    width: auto;
     margin: 0px;
     padding: 0px;
     border-radius: 15px;
 }
+
+.World-clock {
+    grid-column: 4 /-1;
+    grid-row: 2/3;
+}
+
 h2 {
   font-size: 25px;
   font-weight: 600;
@@ -171,7 +178,7 @@ input {
   height: 25rem;
   border:5px solid rgba(255,255,255,0.9);
   border-radius:50%;
-  margin:50px auto;
+  margin:auto;
   position: relative;
   padding:2rem;
   background: rgba(255,255,255,0.2);
@@ -334,8 +341,8 @@ input {
   overflow-y: auto;
   overflow-x: hidden;
   height: 370px;
-  position: relative;
-  left: -15px;
+  justify-content: center;
+  align-items: center;
 }
 
 ul li span {
@@ -343,27 +350,23 @@ ul li span {
   font-size: 1.7em;
   font-weight: 400;
   line-height: 30px;
-
-
 }
 ul li {
     border-bottom: 2px solid rgba(0,0,0,0.2);
-    min-width: 250px;
-    text-align: justify;
+    text-align: left;
     list-style: none;
 }
 ul li input {
-  position: relative;
-  left: 0px;
   background: rgba(255, 255, 255, 0.2);
   text-transform: inherit;
   color: rgba(255,255,255,0.85);
-  text-shadow: 1px 1px rgba(255,255,255,0.0);
+  border-bottom: 2px solid rgba(0,0,0,0.2);
   height: auto;
   width: 10px;
   font-size: 1em;
   text-align: left;
   font-weight:200;
+  padding-right: 0px;
 }
 
 .delete {
@@ -374,19 +377,20 @@ ul li input {
 /*Saved List----------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
 .wrapper {
-  padding: 10px;
-  max-width: 300px;
-  min-width: 300px;
-  height: 430px;
+  display: grid;
+  grid-column: 1/2;
+  grid-row: 2/3;
+  padding: 30px 10px 10px 10px;
   background: rgba(255,255,255,0.2);
   border:5px solid rgba(255,255,255,0.9);
   border-radius: 15px;
-  margin-left: auto;
-  margin-right: auto;
-  position: relative;
+  justify-content: center;
+  align-items: center;
+  margin-left: 50px;
 }
 
 h2 {
+  grid-column: 2/3;
   text-align: center;
   margin: 0;
   font-weight: 200;
