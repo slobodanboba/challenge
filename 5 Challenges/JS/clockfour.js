@@ -55,7 +55,7 @@ function imageClick(e) {
   imageLat = (50 - positionY/5) * 1.8;
   imageLon = (positionX/10 - 50) * 3.6;
   console.log(imageLat , imageLon);
-  fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${imageLat}&lon=${imageLon}&units=metric&APPID=261e313010ab3d43b1344ab9eba64cfa`)
+  fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${imageLat}&lon=${imageLon}&units=metric&APPID=261e313010ab3d43b1344ab9eba64cfa`)
   .then(response => response.json())
   .then(function(data) {
     wheatherAllWorld = data.main.temp ;
@@ -164,7 +164,7 @@ let maxColumn = 0;
 let maxRow = 0;
 
 function zoom (e) {
-  if(e.ctrlKey) {
+  if(e.ctrlKey || e.shiftKey) {
      zoomedpic.style.backgroundImage = `url(./images/img${e.target.id}.jpg)`;
      zoomedpic.style.display = "grid";
      maxRow = Math.floor(e.target.id/10);
@@ -186,11 +186,13 @@ function displayZoomed(e) {
   document.documentElement.style.setProperty(`--pageY`, e.pageY + suffix);
   document.querySelector('.spanLat').innerHTML = Math.round(imageLatZoom);
   document.querySelector('.spanLon').innerHTML = Math.round(imageLonZoom);
+  imageLat = imageLatZoom;
+  imageLon = imageLonZoom;
  }
 }
 zoomedpic.addEventListener('mousemove', displayZoomed);
 function zoomout(e) {
-    if(e.ctrlKey) {
+    if(e.ctrlKey || e.shiftKey) {
       zoomedpic.style.display = "none";
       zoombool = false;
     }
@@ -199,7 +201,8 @@ zoomedpic.addEventListener("click", zoomout);
 
 function zoomedAddToList(e) {
   if (!e.ctrlKey && zoombool) {
-  fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${imageLatZoom}&lon=${imageLonZoom}&units=metric&APPID=261e313010ab3d43b1344ab9eba64cfa`)
+  getTimeWorld();
+  fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${imageLatZoom}&lon=${imageLonZoom}&units=metric&APPID=261e313010ab3d43b1344ab9eba64cfa`)
   .then(response => response.json())
   .then(function(data) {
     wheatherAllWorld = data.main.temp ;

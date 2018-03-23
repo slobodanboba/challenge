@@ -15,7 +15,7 @@ function getWheatherSelected() {
     lonSelected = inputCity.results[0].geometry.location.lng;
   })
   .then(function() {
-    fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${latSelected}&lon=${lonSelected}&units=metric&APPID=261e313010ab3d43b1344ab9eba64cfa`)
+    fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${latSelected}&lon=${lonSelected}&units=metric&APPID=261e313010ab3d43b1344ab9eba64cfa`)
     .then(response => response.json())
     .then(function(data) {
       wheatherSydney = data.main.temp ;
@@ -41,7 +41,7 @@ const select = document.querySelectorAll('option');
 select.forEach(option => option.addEventListener('click', getWheatherSelected));
 
 function getWheatherTokyo() {
-  fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${latTokyo}&lon=${lonTokyo}&units=metric&APPID=261e313010ab3d43b1344ab9eba64cfa`)
+  fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${latTokyo}&lon=${lonTokyo}&units=metric&APPID=261e313010ab3d43b1344ab9eba64cfa`)
   .then(response => response.json())
   .then(function(data) {
     wheatherTokyo = data.main.temp ;

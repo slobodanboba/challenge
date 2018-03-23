@@ -39,7 +39,7 @@ let lon = 151;
 let latTokyo = 35.6;
 let lonTokyo = 135.7;
 function getWheatherLondon() {
-  fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&APPID=261e313010ab3d43b1344ab9eba64cfa`)
+  fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&APPID=261e313010ab3d43b1344ab9eba64cfa`)
 .then(response => response.json())
   .then(function(data) {
     wheatherLondon = data.main.temp ;
