@@ -16,15 +16,43 @@ let offsetWorld = '';
 let wheatherIconWorld = '';
 let zoombool = false;
 let theCSSpropHeight = '';
+let varHeight = 0;
 let theCSSpropWidth = '';
 let imageHeight = 0;
 let heightDevider = 0;
 let imageWidth = 0;
 let widthDevider = 0;
+let images = document.querySelectorAll('.img');
+let zoomedpic = document.querySelector('.zoomed');
+let maxlat = 0;
+let minlon = 0;
+let positionYZoom = 0;
+let positionXZoom = 0;
+let imageLatZoom = 0;
+let imageLonZoom = 0;
+let maxColumn = 0;
+let maxRow = 0;
 
 let image = document.querySelector(".world-map");
 
+
+function getWidthHeight() {
+  theCSSpropWidth = window.getComputedStyle(image,null).getPropertyValue("width");
+  imageWidth = parseInt(theCSSpropWidth);
+  varHeight = imageWidth/2;
+  console.log('varHeight', varHeight);
+  document.documentElement.style.setProperty("--height", varHeight + suffix);
+  theCSSpropHeight = window.getComputedStyle(image,null).getPropertyValue("height");
+  imageHeight = parseInt(theCSSpropHeight);
+  console.log("imageHeight",theCSSpropHeight);
+  heightDevider = imageHeight/100;
+
+  widthDevider = imageWidth/100;
+}
+getWidthHeight();
+
 function scroll() {
+  getWidthHeight();
   imageOffsetTop = image.offsetTop;
   imageOffsetLeft = image.offsetLeft;
   console.log(imageOffsetTop);
@@ -34,16 +62,7 @@ window.addEventListener("scroll", scroll);
 
 function displayLonLat(e) {
    if (!zoombool) {
-  theCSSpropHeight = window.getComputedStyle(image,null).getPropertyValue("height");
-  theCSSpropWidth = window.getComputedStyle(image,null).getPropertyValue("width");
-  imageHeight = parseInt(theCSSpropHeight);
-  console.log(imageHeight);
-  heightDevider = imageHeight/100;
-  console.log(heightDevider);
-  imageWidth = parseInt(theCSSpropWidth);
-  console.log(imageWidth);
-  widthDevider = imageWidth/100;
-  console.log(widthDevider);
+  getWidthHeight();
   positionY = e.pageY - imageOffsetTop;
   positionX = e.pageX - imageOffsetLeft;
   imageLat = (50 - positionY/heightDevider) * 1.8;
@@ -64,22 +83,9 @@ image.addEventListener("mousemove", displayLonLat);
 image.addEventListener("mouseover", displayOn);
 image.addEventListener("mouseout", displayOff);
 
-
-
 function imageClick(e) {
      if(!e.ctrlKey && !zoombool) {
-  theCSSpropHeight = window.getComputedStyle(image,null).getPropertyValue("height");
-  theCSSpropWidth = window.getComputedStyle(image,null).getPropertyValue("width");
-  imageHeight = parseInt(theCSSpropHeight);
-  console.log(imageHeight);
-  heightDevider = imageHeight/100;
-  console.log(heightDevider);
-  imageWidth = parseInt(theCSSpropWidth);
-  console.log(imageWidth);
-  widthDevider = imageWidth/100;
-  console.log(widthDevider);
-
-
+  getWidthHeight();
   positionY = e.pageY - imageOffsetTop ;
   positionX = e.pageX - imageOffsetLeft ;
   imageLat = (50 - positionY/heightDevider) * 1.8;
@@ -182,19 +188,9 @@ setInterval(setDateWorld, 1000);
 setDateWorld();
 image.addEventListener("click", getTimeWorld);
 
-let images = document.querySelectorAll('.img');
-let zoomedpic = document.querySelector('.zoomed');
-let maxlat = 0;
-let minlon = 0;
-let positionYZoom = 0;
-let positionXZoom = 0;
-let imageLatZoom = 0;
-let imageLonZoom = 0;
-let maxColumn = 0;
-let maxRow = 0;
-
 function zoom (e) {
   if(e.ctrlKey || e.shiftKey) {
+     getWidthHeight();
      zoomedpic.style.backgroundImage = `url(./images/img${e.target.id}.jpg)`;
      zoomedpic.style.display = "grid";
      maxRow = Math.floor(e.target.id/10);
@@ -208,16 +204,7 @@ images.forEach(option => option.addEventListener('click', zoom));
 
 function displayZoomed(e) {
      if(zoombool == true) {
-  theCSSpropHeight = window.getComputedStyle(image,null).getPropertyValue("height");
-  theCSSpropWidth = window.getComputedStyle(image,null).getPropertyValue("width");
-  imageHeight = parseInt(theCSSpropHeight);
-  console.log(imageHeight);
-  heightDevider = imageHeight/100;
-  console.log(heightDevider);
-  imageWidth = parseInt(theCSSpropWidth);
-  console.log(imageWidth);
-   widthDevider = imageWidth/100;
-   console.log(widthDevider);
+  getWidthHeight();
   positionYZoom = e.pageY - imageOffsetTop;
   positionXZoom = e.pageX - imageOffsetLeft;
   imageLatZoom = (maxlat) - ((positionYZoom/heightDevider) * 0.18);
@@ -233,6 +220,7 @@ function displayZoomed(e) {
 zoomedpic.addEventListener('mousemove', displayZoomed);
 function zoomout(e) {
     if(e.ctrlKey || e.shiftKey) {
+      getWidthHeight();
       zoomedpic.style.display = "none";
       zoombool = false;
     }
@@ -241,6 +229,7 @@ zoomedpic.addEventListener("click", zoomout);
 
 function zoomedAddToList(e) {
   if (!e.ctrlKey && zoombool) {
+  getWidthHeight();
   getTimeWorld();
   fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${imageLatZoom}&lon=${imageLonZoom}&units=metric&APPID=261e313010ab3d43b1344ab9eba64cfa`)
   .then(response => response.json())
