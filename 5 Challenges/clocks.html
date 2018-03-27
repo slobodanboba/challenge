@@ -41,6 +41,25 @@
       <div class="temp-info temp-tokyo"><span class="text-london"><span class="tempTokyo"></span><span>°C</span>|<span class="tempFTokyo"></span><span>°F</span></div>
       <div class="icons icon-Tokyo"></div>
     </div>
+    <div class="clock tokyo-clock">
+      <div class="clock-face">
+        <div class="hand hour-hand hour-handTokio"></div>
+        <div class="hand min-hand min-handTokio"></div>
+        <div class="hand second-hand second-handTokio"></div>
+        <div class="dot-center"></div>
+        <div class="hours hour3"></div>
+        <div class="hours hour6"></div>
+        <div class="hours hour9"></div>
+        <div class="hours hour12"></div>
+        <div class="city InputCity">
+          <form style="input-city" id="form">
+            <input style="input input-value" type="text" name="inputCity" value="City"><br>
+          </form>
+        </div>
+      </div>
+      <div class="temp-info temp-tokyo"><span class="text-london"><span class="tempTokyo"></span><span>°C</span>|<span class="tempFTokyo"></span><span>°F</span></div>
+      <div class="icons icon-Tokyo"></div>
+    </div>
     <div class="clock sydney-clock">
       <div class="clock-face">
         <div class="hand hour-hand hour-handSelected"></div>
@@ -84,8 +103,8 @@
         <div class="hours hour12"></div>
         <div class="World-names"><span class="World-city">World</span><span class="World-countrey"></span></div>
       </div>
-      <div class="temp-info tempAllWorld"><span class="text-london"><span class="temp temp-AllWorld"></span><span>°C</span>|<span class="temp tempF-AllWorld"></span><span>°F</span></div>
-      <div class="icons icon-AllWorld"></div>
+      <div class="temp-info tempAllWorld"><span class="text-london"><span class="temp temp-AllWorld"></span><span>°C</span>|<span class="temp tempF-AllWorld"></span><span>°F</span><div class="temp day-AllWorld"></div></div>
+     <div class="icons icon-AllWorld"></div>
     </div>
     <div class="world-map">
           <div class="img img1" id="0" data-minlon="" data-maxlat=""></div>
@@ -198,7 +217,7 @@
       </ul>
     </div>
       </div>
-        <div class="movingDiv" data-sizing="px"><div class="movingLat"><span class="LonLat">Lat:</span><span class="LonLat spanLat"></span></div><div class="movingLong"><span class="LonLat">Lon:</span><span class="LonLat spanLon"></span></div><div>
+        <div class="movingDiv"><div class="movingLat"><span class="LonLat">Lat:</span><span class="LonLat spanLat"></span></div><div class="movingLong"><span class="LonLat">Lon:</span><span class="LonLat spanLon"></span></div><span class="LonLat cornerTemp"></span><span class="LonLat cornerTempF"></span><span class="LonLat cornerDay"></span></div>
       <script src="./JS/clockone.js"></script>
       <script src="./JS/clocktwo.js"></script>
       <script src="./JS/clocktree.js"></script>

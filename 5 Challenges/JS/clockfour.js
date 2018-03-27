@@ -22,8 +22,6 @@ let imageHeight = 0;
 let heightDevider = 0;
 let imageWidth = 0;
 let widthDevider = 0;
-let images = document.querySelectorAll('.img');
-let zoomedpic = document.querySelector('.zoomed');
 let maxlat = 0;
 let minlon = 0;
 let positionYZoom = 0;
@@ -32,21 +30,48 @@ let imageLatZoom = 0;
 let imageLonZoom = 0;
 let maxColumn = 0;
 let maxRow = 0;
-
+let day = '';
 let image = document.querySelector(".world-map");
+let images = document.querySelectorAll('.img');
+let zoomedpic = document.querySelector('.zoomed');
+
+
+function getDay() {
+switch (new Date().getDay()) {
+    case 0:
+        day = "Sunday";
+        break;
+    case 1:
+        day = "Monday";
+        break;
+    case 2:
+        day = "Tuesday";
+        break;
+    case 3:
+        day = "Wednesday";
+        break;
+    case 4:
+        day = "Thursday";
+        break;
+    case 5:
+        day = "Friday";
+        break;
+    case 6:
+        day = "Saturday";
+}
+}
+getDay();
+console.log(day);
 
 
 function getWidthHeight() {
   theCSSpropWidth = window.getComputedStyle(image,null).getPropertyValue("width");
   imageWidth = parseInt(theCSSpropWidth);
   varHeight = imageWidth/2;
-  console.log('varHeight', varHeight);
   document.documentElement.style.setProperty("--height", varHeight + suffix);
   theCSSpropHeight = window.getComputedStyle(image,null).getPropertyValue("height");
   imageHeight = parseInt(theCSSpropHeight);
-  console.log("imageHeight",theCSSpropHeight);
   heightDevider = imageHeight/100;
-
   widthDevider = imageWidth/100;
 }
 getWidthHeight();
@@ -61,17 +86,30 @@ scroll();
 window.addEventListener("scroll", scroll);
 
 function displayLonLat(e) {
-   if (!zoombool) {
+  if (!zoombool && window.matchMedia("(max-width: 1000px)").matches) {
   getWidthHeight();
   positionY = e.pageY - imageOffsetTop;
   positionX = e.pageX - imageOffsetLeft;
   imageLat = (50 - positionY/heightDevider) * 1.8;
   imageLon = (positionX/widthDevider - 50) * 3.6;
-  document.documentElement.style.setProperty("--pageX", e.pageX + suffix);
-  document.documentElement.style.setProperty(`--pageY`, e.pageY + suffix);
+  document.documentElement.style.setProperty("--pageX", 10 + suffix);
+  document.documentElement.style.setProperty(`--pageY`, 10 + suffix);
   document.querySelector('.spanLat').innerHTML = Math.round(imageLat);
   document.querySelector('.spanLon').innerHTML = Math.round(imageLon);
- }
+  document.querySelector('.cornerTemp').innerHTML = Math.round(wheatherAllWorld) + "C";
+  document.querySelector('.cornerTempF').innerHTML = Math.round(weatherAllWorldF) + "F";
+  document.querySelector('.cornerDay').innerHTML = day;
+} else {
+getWidthHeight();
+positionY = e.pageY - imageOffsetTop;
+positionX = e.pageX - imageOffsetLeft;
+imageLat = (50 - positionY/heightDevider) * 1.8;
+imageLon = (positionX/widthDevider - 50) * 3.6;
+document.documentElement.style.setProperty("--pageX", e.pageX + suffix);
+document.documentElement.style.setProperty(`--pageY`, e.pageY + suffix);
+document.querySelector('.spanLat').innerHTML = Math.round(imageLat);
+document.querySelector('.spanLon').innerHTML = Math.round(imageLon);
+}
 }
 function displayOn() {
   document.querySelector('.movingDiv').style.display = "block";
@@ -79,9 +117,12 @@ function displayOn() {
 function displayOff() {
   document.querySelector('.movingDiv').style.display = "none";
 }
+
 image.addEventListener("mousemove", displayLonLat);
+image.addEventListener("click", displayLonLat);
 image.addEventListener("mouseover", displayOn);
 image.addEventListener("mouseout", displayOff);
+
 
 function imageClick(e) {
      if(!e.ctrlKey && !zoombool) {
@@ -100,6 +141,7 @@ function imageClick(e) {
     document.querySelector(".tempF-AllWorld").innerHTML = `${Math.round(weatherAllWorldF)}`;
     wheatherIconWorld = data.weather[0].icon;
     document.querySelector(".icon-AllWorld").innerHTML = `<img class="icon-Img-Tokyo" src="../content/${wheatherIconWorld}.png" width="70px" height="70px">`;
+    document.querySelector(".day-AllWorld").innerHTML = `${day}`;
   })
   .then(function() {
     fetch(` https://maps.googleapis.com/maps/api/geocode/json?latlng=${imageLat},${imageLon}&key=AIzaSyAhbhZNE6A-Zcg49SMCyO7r_lH4MCDylRc `)
@@ -197,10 +239,10 @@ function zoom (e) {
      maxlat = (90 - (maxRow  * 18));
      maxColumn = (e.target.id%10);
      minlon = maxColumn * 36 - 180;
-     zoombool = true;
-     console.log(e.target);
+     zoombool = true;;
 }};
 images.forEach(option => option.addEventListener('click', zoom));
+
 
 function displayZoomed(e) {
      if(zoombool == true) {
@@ -228,7 +270,9 @@ function zoomout(e) {
 zoomedpic.addEventListener("click", zoomout);
 
 function zoomedAddToList(e) {
+  console.log(e.type);
   if (!e.ctrlKey && zoombool) {
+    console.log(e);
   getWidthHeight();
   getTimeWorld();
   fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${imageLatZoom}&lon=${imageLonZoom}&units=metric&APPID=261e313010ab3d43b1344ab9eba64cfa`)
