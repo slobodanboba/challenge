@@ -3,7 +3,15 @@ let offsetinputCity = '';
 let latInputCity = 0;
 let lonInputCity = 0;
 let inputValue = '';
+let citiesList = [];
 const inputCity = document.querySelector("#form");
+
+
+fetch('../content/city_list.json')
+.then(response => response.json())
+.then(data => citiesList.push(...data))
+.then(citiesList.filter(city => city='Madrid'));
+
 
 function getValue(e) {
   e.preventDefault();
