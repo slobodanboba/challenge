@@ -6,10 +6,16 @@ let inputValue = '';
 let citiesList = [];
 let theCity= [];
 let cityOption = '';
+let selectedOption = false;
+let selectOption = document.querySelectorAll('[name=options]');
 const inputCity = document.querySelector("#form");
 const selectedCityOption = document.querySelector(".selectedSelect");
 
-function getConfirmation() {
+
+function getConfirmation(e) {
+  e.preventDefault();
+  theCity= [];
+ inputValue = (this.querySelector('[name=inputCity]')).value
 fetch('https://raw.githubusercontent.com/slobodanboba/challenge/master/5%20Challenges/content/city_list.json')
 .then(response => response.json())
 .then(data => data.filter(city => city.name == `${inputValue}`))
@@ -17,18 +23,34 @@ fetch('https://raw.githubusercontent.com/slobodanboba/challenge/master/5%20Chall
 .then(function(city , i) {
   const savedList = document.querySelector('.list');
   selectedCityOption.innerHTML = theCity.map(city => {
-     return `<option>${city.name} ${city.country}</option>`
+     return `<option name='options' value=${city.name} data-country=${city.country}>${city.name} ${city.country}</option>`
     ;
   }).join('');
+  selectOption = document.querySelectorAll('[name=options]');
+  console.log(selectOption);
 });
 }
 
+inputCity.addEventListener("submit", getConfirmation);
 
+function getLaLonSelected(e) {
+    theCity.filter(city => city.country == e.target.dataset.country)
+    .then(city => {
+      latInputCity = city.coord.lat;
+      console.log('latInputCity',latInputCity);
+      lonInputCity = city.coord.lon;
+      selectedOption = true;
+    })
+}
+
+
+selectOption.forEach(option => option.addEventListener('click', getLaLonSelected));
 
 function getValue(e) {
+  if(selectedOption) {
   e.preventDefault();
   inputValue = (this.querySelector('[name=inputCity]')).value
-  getConfirmation();
+  getConfirmation()
   fetch(` https://maps.googleapis.com/maps/api/geocode/json?address=${inputValue}&key=AIzaSyAhbhZNE6A-Zcg49SMCyO7r_lH4MCDylRc `)
 .then(response => response.json())
   .then(function(inputCity) {
@@ -54,8 +76,12 @@ function getValue(e) {
       });
     });
   });
+};
 }
-inputCity.addEventListener("submit", getValue);
+
+// selectOption.forEach(option => option.addEventListener('click', getValue));
+
+
 
 
 const secondHandTokio = document.querySelector('.second-handTokio');
