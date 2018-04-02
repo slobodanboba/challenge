@@ -335,6 +335,16 @@ input {
   padding: 1px;
   margin: 10px;
 }
+.movingDivmax1000 {
+  width: auto;
+  height: auto;
+  display: none;
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  background: rgba(0,0,0,0.2);
+  padding: 1px;
+}
 .LonLat{
   font-size: 12px;
   text-align: left;

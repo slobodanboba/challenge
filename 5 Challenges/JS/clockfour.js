@@ -86,20 +86,6 @@ scroll();
 window.addEventListener("scroll", scroll);
 
 function displayLonLat(e) {
-  if (!zoombool && window.matchMedia("(max-width: 1000px)").matches) {
-  getWidthHeight();
-  positionY = e.pageY - imageOffsetTop;
-  positionX = e.pageX - imageOffsetLeft;
-  imageLat = (50 - positionY/heightDevider) * 1.8;
-  imageLon = (positionX/widthDevider - 50) * 3.6;
-  document.documentElement.style.setProperty("--pageX", 10 + suffix);
-  document.documentElement.style.setProperty(`--pageY`, 10 + suffix);
-  document.querySelector('.spanLat').innerHTML = Math.round(imageLat);
-  document.querySelector('.spanLon').innerHTML = Math.round(imageLon);
-  document.querySelector('.cornerTemp').innerHTML = Math.round(wheatherAllWorld) + "C";
-  document.querySelector('.cornerTempF').innerHTML = Math.round(weatherAllWorldF) + "F";
-  document.querySelector('.cornerDay').innerHTML = day;
-} else {
 getWidthHeight();
 positionY = e.pageY - imageOffsetTop;
 positionX = e.pageX - imageOffsetLeft;
@@ -110,10 +96,13 @@ document.documentElement.style.setProperty(`--pageY`, e.pageY + suffix);
 document.querySelector('.spanLat').innerHTML = Math.round(imageLat);
 document.querySelector('.spanLon').innerHTML = Math.round(imageLon);
 }
-}
 function displayOn() {
+  if (!window.matchMedia("(max-width: 1000px)").matches) {
   document.querySelector('.movingDiv').style.display = "block";
+  document.querySelector('.movingDivmax1000').style.display = "none";
+  }
 }
+
 function displayOff() {
   document.querySelector('.movingDiv').style.display = "none";
 }
@@ -123,6 +112,29 @@ image.addEventListener("click", displayLonLat);
 image.addEventListener("mouseover", displayOn);
 image.addEventListener("mouseout", displayOff);
 
+function displayLonLat1000px(e) {
+  if (!zoombool && window.matchMedia("(max-width: 1000px)").matches) {
+  getWidthHeight();
+  document.querySelector('.movingDivmax1000').style.display = "block";
+  positionY = e.pageY - imageOffsetTop;
+  positionX = e.pageX - imageOffsetLeft;
+  imageLat = (50 - positionY/heightDevider) * 1.8;
+  imageLon = (positionX/widthDevider - 50) * 3.6;
+  document.querySelector('.spanLat1000').innerHTML = Math.round(imageLat);
+  document.querySelector('.spanLon1000').innerHTML = Math.round(imageLon);
+  document.querySelector('.cornerTemp1000').innerHTML = Math.round(wheatherAllWorld) + "C";
+  document.querySelector('.cornerTempF1000').innerHTML = Math.round(weatherAllWorldF) + "F";
+  document.querySelector('.cornerDay1000').innerHTML = day;
+  fetch(` https://maps.googleapis.com/maps/api/geocode/json?latlng=${imageLat},${imageLon}&key=AIzaSyAhbhZNE6A-Zcg49SMCyO7r_lH4MCDylRc `)
+  .then(response => response.json())
+  .then(function(cityName) {
+      worldPlace = cityName.results[0].address_components[1].short_name;
+      document.querySelector(".cityCorner1000").innerHTML = `${worldPlace}`;
+  })
+}
+}
+
+image.addEventListener("click", displayLonLat1000px);
 
 function imageClick(e) {
      if(!e.ctrlKey && !zoombool) {
