@@ -4,18 +4,31 @@ let latInputCity = 0;
 let lonInputCity = 0;
 let inputValue = '';
 let citiesList = [];
+let theCity= [];
+let cityOption = '';
 const inputCity = document.querySelector("#form");
+const selectedCityOption = document.querySelector(".selectedSelect");
 
-
-fetch('../content/city_list.json')
+function getConfirmation() {
+fetch('https://raw.githubusercontent.com/slobodanboba/challenge/master/5%20Challenges/content/city_list.json')
 .then(response => response.json())
-.then(data => citiesList.push(...data))
-.then(citiesList.filter(city => city='Madrid'));
+.then(data => data.filter(city => city.name == `${inputValue}`))
+.then(city => theCity.push(...city))
+.then(function(city , i) {
+  const savedList = document.querySelector('.list');
+  selectedCityOption.innerHTML = theCity.map(city => {
+     return `<option>${city.name} ${city.country}</option>`
+    ;
+  }).join('');
+});
+}
+
 
 
 function getValue(e) {
   e.preventDefault();
   inputValue = (this.querySelector('[name=inputCity]')).value
+  getConfirmation();
   fetch(` https://maps.googleapis.com/maps/api/geocode/json?address=${inputValue}&key=AIzaSyAhbhZNE6A-Zcg49SMCyO7r_lH4MCDylRc `)
 .then(response => response.json())
   .then(function(inputCity) {
@@ -43,6 +56,8 @@ function getValue(e) {
   });
 }
 inputCity.addEventListener("submit", getValue);
+
+
 const secondHandTokio = document.querySelector('.second-handTokio');
 const minsHandTokio = document.querySelector('.min-handTokio');
 const hourHandTokio = document.querySelector('.hour-handTokio');
